@@ -123,7 +123,7 @@ class ApiService {
 
   // Statistics and export endpoints
   async getStatistics(): Promise<ApiResponse<DashboardStats>> {
-    const response: AxiosResponse<ApiResponse<DashboardStats>> = await this.api.get('/admin/statistics');
+    const response: AxiosResponse<ApiResponse<DashboardStats>> = await this.api.get('/admin/dashboard/stats');
     return response.data;
   }
 

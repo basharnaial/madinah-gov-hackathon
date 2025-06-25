@@ -18,7 +18,7 @@
     <div class="container-custom py-8">
       <!-- Statistics Cards -->
       <div class="grid md:grid-cols-4 gap-6 mb-8">
-        <div class="card bg-gradient-to-r from-accent-500 to-accent-600 text-white">
+        <div class="card bg-blue-500 text-black">
           <div class="flex items-center">
             <div class="p-3 bg-white bg-opacity-20 rounded-lg">
               <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -32,7 +32,7 @@
           </div>
         </div>
 
-        <div class="card bg-gradient-to-r from-primary-500 to-primary-600 text-white">
+        <div class="card bg-green-500 text-black">
           <div class="flex items-center">
             <div class="p-3 bg-white bg-opacity-20 rounded-lg">
               <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -46,7 +46,7 @@
           </div>
         </div>
 
-        <div class="card bg-gradient-to-r from-yellow-500 to-yellow-600 text-white">
+        <div class="card bg-yellow-400 text-black">
           <div class="flex items-center">
             <div class="p-3 bg-white bg-opacity-20 rounded-lg">
               <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -60,7 +60,7 @@
           </div>
         </div>
 
-        <div class="card bg-gradient-to-r from-red-500 to-red-600 text-white">
+        <div class="card bg-red-500 text-black">
           <div class="flex items-center">
             <div class="p-3 bg-white bg-opacity-20 rounded-lg">
               <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -256,6 +256,12 @@
               <label class="block text-sm font-medium text-gray-700">فكرة المشروع</label>
               <p class="text-sm text-gray-900">{{ selectedParticipant.project_idea }}</p>
             </div>
+            <div v-if="selectedParticipant.cv_path">
+              <label class="block text-sm font-medium text-gray-700">السيرة الذاتية</label>
+              <button @click="downloadCv(selectedParticipant.id)" class="text-accent-500 underline">
+                تحميل السيرة الذاتية
+              </button>
+            </div>
           </div>
           <div class="mt-6 flex justify-end">
             <button @click="selectedParticipant = null" class="btn btn-outline">
@@ -301,7 +307,7 @@ const statistics = reactive({
 });
 
 const filteredParticipants = computed(() => {
-  let filtered = participants.value;
+  let filtered = participants.value.filter(p => p && p.full_name);
 
   if (filters.search) {
     const search = filters.search.toLowerCase();
@@ -333,9 +339,16 @@ async function loadParticipants() {
   loading.value = true;
   try {
     const response = await apiService.getParticipants();
-    if (response.success) {
-      participants.value = response.data;
-      totalParticipants.value = response.data.length;
+    if (response.success && response.data) {
+      // Support paginated response (data.data)
+      if (Array.isArray(response.data.data)) {
+        participants.value = response.data.data;
+        totalParticipants.value = response.data.total || response.data.data.length;
+      } else {
+        // Fallback: direct array
+        participants.value = response.data;
+        totalParticipants.value = response.data.length;
+      }
     }
   } catch (error: any) {
     uiStore.showAlert('error', 'فشل في تحميل المشاركين');
@@ -347,11 +360,12 @@ async function loadParticipants() {
 async function loadStatistics() {
   try {
     const response = await apiService.getStatistics();
-    if (response.success) {
-      statistics.total_participants = response.data?.total_participants || 0;
-      statistics.approved_participants = response.data?.approved_participants || 0;
-      statistics.pending_participants = response.data?.pending_participants || 0;
-      statistics.rejected_participants = response.data?.rejected_participants || 0;
+    if (response.success && response.data) {
+      statistics.total_participants = response.data.total_participants || 0;
+      statistics.approved_participants = response.data.approved_participants || 0;
+      statistics.pending_participants = response.data.pending_participants || 0;
+      statistics.rejected_participants = response.data.rejected_participants || 0;
+      // يمكنك إضافة المزيد إذا أردت
     }
   } catch (error: any) {
     console.error('Failed to load statistics:', error);
@@ -438,6 +452,22 @@ function nextPage() {
 function handleLogout() {
   adminStore.logout();
   router.push('/admin/login');
+}
+
+async function downloadCv(id: number) {
+  try {
+    const blob = await apiService.downloadParticipantCv(id);
+    const url = window.URL.createObjectURL(new Blob([blob]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'cv.pdf');
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    uiStore.showAlert('error', 'فشل في تحميل السيرة الذاتية');
+  }
 }
 </script>
 

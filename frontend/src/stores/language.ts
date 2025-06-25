@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import type { Language } from '@/types';
+import i18n from '@/utils/i18n';
 
 export const useLanguageStore = defineStore('language', () => {
   const currentLanguage = ref<Language>('en');
@@ -18,6 +19,11 @@ export const useLanguageStore = defineStore('language', () => {
     currentLanguage.value = language;
     localStorage.setItem('language', language);
     
+    // Update i18n global locale
+    if (i18n.global.locale) {
+      i18n.global.locale.value = language;
+    }
+
     // Update HTML attributes
     document.documentElement.lang = language;
     document.documentElement.dir = isRTL.value ? 'rtl' : 'ltr';
