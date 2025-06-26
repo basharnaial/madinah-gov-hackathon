@@ -74,4 +74,8 @@
   .ltr {
     direction: ltr;
   }
+}
+
+.to-secondary-300 {
+    --tw-gradient-to: #835f39 var(--tw-gradient-to-position);
 } 

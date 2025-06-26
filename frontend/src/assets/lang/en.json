@@ -68,7 +68,22 @@
     "faq4_question": "What prizes are available?",
     "faq4_answer": "Total prizes reach 100,000 Saudi Riyals, in addition to job opportunities and strategic partnerships.",
     "cta_title": "Ready to Participate?",
-    "cta_subtitle": "Register now and be part of the biggest hackathon in Madinah"
+    "cta_subtitle": "Register now and be part of the biggest hackathon in Madinah",
+    "event_sponsor": "Sponsored by Madinah Province Emirate",
+    "event_location": "In the land of Taybah",
+    "registration_closes": "Registration closes",
+    "event_date": "2025-07-12",
+    "days": "Day",
+    "hours": "Hour",
+    "minutes": "Minute",
+    "seconds": "Second",
+    "target_audiences_title": "Target Audiences",
+    "target_audiences_gov": "Government Entities",
+    "target_audiences_gov_desc": "Includes ministries, authorities, and government institutions seeking to develop their digital services.",
+    "target_audiences_pro": "Professionals & Innovators",
+    "target_audiences_pro_desc": "Developers, designers, entrepreneurs, and anyone passionate about tech innovation.",
+    "target_audiences_students": "Students & Fresh Graduates",
+    "target_audiences_students_desc": "University and institute students and fresh graduates seeking to develop their technical skills."
   },
   "form": {
     "full_name": "Full Name",
@@ -119,6 +134,23 @@
     "login_error": "Login failed",
     "login_processing": "Logging in...",
     "remember_me": "Remember me",
-    "back_to_home": "Back to Home"
+    "back_to_home": "Back to Home",
+    "goal1_title": "Enhancing Strategic Directions for Digital Transformation",
+"goal1_desc": "Supporting innovation in digital services and achieving an integrated digital environment.",
+"goal2_title": "Meeting Digital Transformation Requirements",
+"goal2_desc": "Implementing emerging technologies according to national standards.",
+"goal3_title": "Spreading Digital Transformation Culture",
+"goal3_desc": "Promoting innovation and engagement with beneficiaries.",
+"goal4_title": "Leadership in Digital Transformation",
+"goal4_desc": "Expanding experts' horizons and applying pioneering ideas.",
+"goal5_title": "Activating Digital Transformation Partnerships",
+"goal5_desc": "Engaging local entities to serve the Emirate's goals.",
+"goal6_title": "Activating Private Sector Partnership",
+"goal6_desc": "Empowering innovators and improving social impact.",
+"goal7_title": "Empowering Young Talents",
+"goal7_desc": "Promoting a culture of innovation and engagement with beneficiaries.",
+"goal8_title": "Engaging with Beneficiaries",
+"goal8_desc": "Increasing digital presence and connecting them with entrepreneurs.",
+"goals_title": "Madinah Hackathon Goals"
   }
 } 
