@@ -72,4 +72,10 @@ class Participant extends Model
     {
         return $this->cv_path ? asset('storage/' . $this->cv_path) : null;
     }
+
+    // Team members relationship
+    public function teamMembers()
+    {
+        return $this->hasMany(TeamMember::class);
+    }
 }

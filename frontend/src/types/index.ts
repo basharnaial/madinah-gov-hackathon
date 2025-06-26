@@ -160,6 +160,7 @@ export const FIELD_OF_INTEREST_OPTIONS = [
 export const REGISTRATION_TYPE_OPTIONS = [
   { value: 'Individual', label: 'Individual', label_ar: 'فردي' },
   { value: 'Team', label: 'Team', label_ar: 'فريق' },
+  { value: 'Organization', label: 'Organization', label_ar: 'منظمة' },
 ];
 
 export const STATUS_OPTIONS = [

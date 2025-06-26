@@ -51,6 +51,38 @@
             </select>
             <p v-if="errors.registration_type" class="text-red-500 text-xs mt-1">{{ errors.registration_type[0] }}</p>
           </div>
+          
+          <!-- Team Members Section (shows only when Team is selected) -->
+          <div v-if="form.registration_type === 'Team'" class="mt-6 p-4 bg-secondary-100 rounded-lg border">
+            <h3 class="text-lg font-semibold text-primary-600 mb-4">أعضاء الفريق</h3>
+            <p class="text-sm text-gray-600 mb-4">أضف أسماء أعضاء الفريق الإضافيين (غير مطلوب)</p>
+            
+            <div v-for="(member, index) in teamMembers" :key="index" class="mb-3 flex gap-2 items-center">
+              <input 
+                v-model="teamMembers[index]" 
+                type="text" 
+                :placeholder="`اسم العضو ${index + 1}`"
+                class="input flex-1"
+              />
+              <button 
+                @click="removeMember(index)" 
+                type="button" 
+                class="text-red-500 hover:text-red-700 px-2 py-1 text-sm"
+                :disabled="teamMembers.length === 1"
+              >
+                حذف
+              </button>
+            </div>
+            
+            <button 
+              @click="addMember" 
+              type="button" 
+              class="btn btn-outline text-sm mt-2"
+            >
+              إضافة عضو جديد
+            </button>
+          </div>
+          
           <div>
             <label class="label" for="cv">{{ $t('form.cv') }}</label>
             <input @change="onFileChange" id="cv" type="file" accept="application/pdf" class="input" :class="{'input-error': errors.cv}" required />
@@ -109,6 +141,19 @@ const form = reactive({
 const errors = reactive<Record<string, string[]>>({});
 const loading = ref(false);
 
+// Team members array (only used when registration_type is 'Team')
+const teamMembers = ref<string[]>(['']);
+
+function addMember() {
+  teamMembers.value.push('');
+}
+
+function removeMember(index: number) {
+  if (teamMembers.value.length > 1) {
+    teamMembers.value.splice(index, 1);
+  }
+}
+
 function onFileChange(e: Event) {
   const target = e.target as HTMLInputElement;
   if (target.files && target.files.length > 0) {
@@ -156,6 +201,15 @@ async function onSubmit() {
         formData.append(key, value as any);
       }
     });
+    
+    // Add team members if registration type is Team
+    if (form.registration_type === 'Team') {
+      const validTeamMembers = teamMembers.value.filter(name => name.trim() !== '');
+      validTeamMembers.forEach((memberName, index) => {
+        formData.append(`team_members[${index}]`, memberName.trim());
+      });
+    }
+    
     const response = await apiService.registerParticipant(formData);
     if (response.success) {
       uiStore.showAlert('success', t('form.success'));

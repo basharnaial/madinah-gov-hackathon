@@ -133,9 +133,19 @@
 
     <!-- شعار الإمارة وعبارة ترحيبية -->
     <div class="flex flex-col items-center mb-2 pt-6 animate-fade-in">
-      <img src="/imarat-logo.png" alt="شعار إمارة المدينة" class="w-32 mb-2" />
+
+      <div class="gap-4 mb-2">
+        <img src="/imarat-logo.png" alt="شعار إمارة المدينة" class="w-32 mb-2" />
+      </div>
+      
+
       <span class="text-accent-500 font-bold text-lg">{{ $t('app.event_sponsor') }}</span>
       <span class="text-primary-500 font-semibold">{{ $t('app.event_location') }}</span>
+      <br>
+      <span class="text-accent-500 font-semibold mb-4">بالتعاون مع</span>
+
+      <img src="/UPM-logo.png" alt="شعار إمارة المدينة" class="w-32 mb-2" />
+
     </div>
 
     <!-- About Section -->

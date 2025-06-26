@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterParticipantRequest;
 use App\Models\Participant;
+use App\Models\TeamMember;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -36,6 +37,18 @@ class RegistrationController extends Controller
                 'status' => 'Pending',
                 'terms_accepted' => true,
             ]);
+
+            // Handle team members if registration type is Team
+            if ($request->registration_type === 'Team' && $request->has('team_members') && is_array($request->team_members)) {
+                foreach ($request->team_members as $memberName) {
+                    if (!empty(trim($memberName))) {
+                        TeamMember::create([
+                            'participant_id' => $participant->id,
+                            'name' => trim($memberName),
+                        ]);
+                    }
+                }
+            }
 
             // Send confirmation email
             $this->sendConfirmationEmail($participant);
