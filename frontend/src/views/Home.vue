@@ -2,7 +2,7 @@
   <div>
     <!-- Hero Section -->
     <section class="relative bg-gradient-to-br from-secondary-500 to-secondary-300 py-18 md:py-20 overflow-hidden">
-      <!-- Emara Pattern كخلفية كاملة للهيرو -->
+      <!-- Emara Pattern as full background for hero section -->
       <img
         src="/Emara-bg.svg"
         alt="Emara Pattern"
@@ -49,7 +49,7 @@
       </div>
     </section>
 
-    <!-- شعار الإمارة وعبارة ترحيبية -->
+    <!-- Emirate logo and welcome message -->
     <div class="flex flex-col items-center mb-2 pt-6 animate-fade-in">
 
       <div class="gap-4 mb-2">
@@ -98,7 +98,7 @@
     <!-- Goals Section -->
     <div class="flex flex-col items-center">
             <h2 class="text-2xl font-semibold text-primary-500 mb-4">{{ $t('admin.goals_title') }}</h2>        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 justify-center">
-          <!-- هدف 1 -->
+          <!-- Goal 1 -->
           <div class="relative group cursor-pointer min-h-[110px] h-full"
                @mouseenter="activeTooltip = 0" @mouseleave="activeTooltip = null">
             <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
@@ -115,7 +115,7 @@
               <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
             </div>
           </div>
-          <!-- هدف 2 -->
+          <!-- Goal 2 -->
           <div class="relative group cursor-pointer min-h-[110px] h-full"
                @mouseenter="activeTooltip = 1" @mouseleave="activeTooltip = null">
             <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
@@ -132,7 +132,7 @@
               <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
             </div>
           </div>
-          <!-- هدف 3 -->
+          <!-- Goal 3 -->
           <div class="relative group cursor-pointer min-h-[110px] h-full"
                @mouseenter="activeTooltip = 2" @mouseleave="activeTooltip = null">
             <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
@@ -149,7 +149,7 @@
               <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
             </div>
           </div>
-          <!-- هدف 4 -->
+          <!-- Goal 4 -->
           <div class="relative group cursor-pointer min-h-[110px] h-full"
                @mouseenter="activeTooltip = 3" @mouseleave="activeTooltip = null">
             <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
@@ -166,7 +166,7 @@
               <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
             </div>
           </div>
-          <!-- هدف 5 -->
+          <!-- Goal 5 -->
           <div class="relative group cursor-pointer min-h-[110px] h-full"
                @mouseenter="activeTooltip = 4" @mouseleave="activeTooltip = null">
             <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
@@ -183,7 +183,7 @@
               <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
             </div>
           </div>
-          <!-- هدف 6 -->
+          <!-- Goal 6 -->
           <div class="relative group cursor-pointer min-h-[110px] h-full"
                @mouseenter="activeTooltip = 5" @mouseleave="activeTooltip = null">
             <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
@@ -200,7 +200,7 @@
               <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
             </div>
           </div>
-          <!-- هدف 7 -->
+          <!-- Goal 7 -->
           <div class="relative group cursor-pointer min-h-[110px] h-full"
                @mouseenter="activeTooltip = 6" @mouseleave="activeTooltip = null">
             <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
@@ -217,7 +217,7 @@
               <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
             </div>
           </div>
-          <!-- هدف 8 -->
+          <!-- Goal 8 -->
           <div class="relative group cursor-pointer min-h-[110px] h-full"
                @mouseenter="activeTooltip = 7" @mouseleave="activeTooltip = null">
             <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
@@ -245,19 +245,19 @@
           {{ $t('app.target_audiences_title') }}
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- الجهات الحكومية -->
+          <!-- Government entities -->
           <div class="bg-secondary-50 rounded-xl shadow hover:shadow-lg transition-all border border-gray-100 p-6 flex flex-col items-center text-center">
             <BuildingOfficeIcon class="w-10 h-10 text-accent-500 mb-3" />
             <div class="font-bold text-primary-600 text-lg mb-1">{{ $t('app.target_audiences_gov') }}</div>
             <div class="text-gray-600 text-sm">{{ $t('app.target_audiences_gov_desc') }}</div>
           </div>
-          <!-- المهنيين والمبتكرين -->
+          <!-- Professionals and innovators -->
           <div class="bg-secondary-50 rounded-xl shadow hover:shadow-lg transition-all border border-gray-100 p-6 flex flex-col items-center text-center">
             <LightBulbIcon class="w-10 h-10 text-accent-500 mb-3" />
             <div class="font-bold text-primary-600 text-lg mb-1">{{ $t('app.target_audiences_pro') }}</div>
             <div class="text-gray-600 text-sm">{{ $t('app.target_audiences_pro_desc') }}</div>
           </div>
-          <!-- الطلبة وحديثي التخرج -->
+          <!-- Students and recent graduates -->
           <div class="bg-secondary-50 rounded-xl shadow hover:shadow-lg transition-all border border-gray-100 p-6 flex flex-col items-center text-center">
             <UserGroupIcon class="w-10 h-10 text-accent-500 mb-3" />
             <div class="font-bold text-primary-600 text-lg mb-1">{{ $t('app.target_audiences_students') }}</div>
@@ -274,7 +274,7 @@
       <div class="container-custom">
         <h2 class="text-3xl font-bold text-primary-600 text-center mb-12">مراحل المسابقة</h2>
         <div class="relative flex flex-col items-center">
-          <!-- الخط العمودي في المنتصف -->
+          <!-- Vertical line in the center -->
           <div class="absolute left-1/2 top-0 w-1 bg-gradient-to-b from-accent-500 to-primary-600 h-full -translate-x-1/2 z-0"></div>
           <div
             v-for="(step, idx) in steps"
@@ -283,7 +283,7 @@
             :ref="el => setStepRef(el, idx)"
             :data-idx="idx"
           >
-            <!-- الكارد: تناوب يمين/يسار -->
+            <!-- Card: alternating right/left -->
             <div class="w-1/2 flex" :class="idx % 2 === 0 ? 'justify-end pr-8' : 'justify-start pl-8'">
               <div
                 class="bg-secondary-500 rounded-xl shadow-lg p-6 text-right max-w-md transition-all duration-700"
@@ -297,7 +297,7 @@
                 <div v-if="step.description" class="text-gray-700 text-sm leading-relaxed">{{ step.description }}</div>
               </div>
             </div>
-            <!-- الدائرة في منتصف الخط -->
+            <!-- Circle in the middle of the line -->
             <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 transition-all duration-700"
               :class="stepsInView[idx] ? 'opacity-100 scale-100' : 'opacity-0 scale-75'"
             >

@@ -470,7 +470,7 @@ async function loadStatistics() {
       statistics.approved_participants = response.data.approved_participants || 0;
       statistics.pending_participants = response.data.pending_participants || 0;
       statistics.rejected_participants = response.data.rejected_participants || 0;
-      // يمكنك إضافة المزيد إذا أردت
+      // You can add more if needed
     }
   } catch (error: any) {
     console.error('Failed to load statistics:', error);

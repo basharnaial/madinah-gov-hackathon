@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('participant_id')->constrained()->onDelete('cascade');
             $table->foreignId('admin_id')->constrained()->onDelete('cascade');
-            $table->decimal('score', 5, 2); // النسبة المئوية (0.00 - 100.00)
-            $table->text('description'); // وصف التحكيم
+            $table->decimal('score', 5, 2); // Percentage score (0.00 - 100.00)
+            $table->text('description'); // Evaluation description
             $table->timestamps();
         });
     }

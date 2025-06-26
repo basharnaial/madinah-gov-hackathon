@@ -8,7 +8,7 @@
 
         </div>
       </router-link>
-      <!-- فاصل عمودي -->
+      <!-- Vertical divider -->
       <div class="hidden md:block border-l-2 border-white/20 h-10 mx-4"></div>
       <!-- Desktop Links -->
       <div class="hidden md:flex items-center gap-8 flex-1 justify-center">
@@ -16,7 +16,7 @@
         <router-link to="/register" class="text-white/90 text-lg font-semibold hover:text-accent-400 transition nav-link" :class="navLinkClass('/register')">{{ $t('app.register') }}</router-link>
         <!-- <a href="#contact" class="text-white/90 text-lg font-semibold hover:text-accent-400 transition nav-link">{{ $t('app.contact') }}</a> -->
       </div>
-      <!-- أزرار CTA -->
+      <!-- CTA buttons -->
       <div class="hidden md:flex items-center gap-3">
         <button @click="toggleLanguage" class="bg--400 text-white font-bold px-5 py-2 rounded-full hover:bg-pink-500 transition">
           {{ currentLanguage === 'en' ? 'AR' : 'EN' }}
