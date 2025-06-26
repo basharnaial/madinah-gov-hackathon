@@ -51,7 +51,7 @@ class AuthController extends Controller
      */
     public function logout(Request $request): JsonResponse
     {
-        $request->user()->currentAccessToken()->delete();
+        $request->user('admin')->currentAccessToken()->delete();
 
         return response()->json([
             'success' => true,
@@ -64,7 +64,7 @@ class AuthController extends Controller
      */
     public function profile(Request $request): JsonResponse
     {
-        $admin = $request->user();
+        $admin = $request->user('admin');
 
         return response()->json([
             'success' => true,

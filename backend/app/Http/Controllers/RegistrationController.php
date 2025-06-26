@@ -38,8 +38,8 @@ class RegistrationController extends Controller
                 'terms_accepted' => true,
             ]);
 
-            // Handle team members if registration type is Team
-            if ($request->registration_type === 'Team' && $request->has('team_members') && is_array($request->team_members)) {
+            // Handle team members if registration type is Team or Organization
+            if (($request->registration_type === 'Team' || $request->registration_type === 'Organization') && $request->has('team_members') && is_array($request->team_members)) {
                 foreach ($request->team_members as $memberName) {
                     if (!empty(trim($memberName))) {
                         TeamMember::create([

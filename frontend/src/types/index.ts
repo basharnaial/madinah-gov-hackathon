@@ -6,6 +6,26 @@ export interface ApiResponse<T = any> {
   error?: string;
 }
 
+// Team Member Types
+export interface TeamMember {
+  id: number;
+  participant_id: number;
+  name: string;
+  created_at: string;
+  updated_at: string;
+}
+
+// Evaluation Types
+export interface Evaluation {
+  id: number;
+  participant_id: number;
+  admin_id: number;
+  score: number;
+  description: string;
+  created_at: string;
+  updated_at: string;
+}
+
 // Participant Types
 export interface Participant {
   id: number;
@@ -15,11 +35,13 @@ export interface Participant {
   age: number;
   city: string;
   field_of_interest: string;
-  registration_type: 'Individual' | 'Team';
+  registration_type: 'Individual' | 'Team' | 'Organization';
   cv_path?: string;
   project_idea?: string;
   status: 'Pending' | 'Approved' | 'Rejected';
   terms_accepted: boolean;
+  team_members?: TeamMember[];
+  evaluation?: Evaluation;
   created_at: string;
   updated_at: string;
 }
@@ -31,7 +53,7 @@ export interface ParticipantForm {
   age: number;
   city: string;
   field_of_interest: string;
-  registration_type: 'Individual' | 'Team';
+  registration_type: 'Individual' | 'Team' | 'Organization';
   cv: File | null;
   project_idea: string;
   terms_accepted: boolean;

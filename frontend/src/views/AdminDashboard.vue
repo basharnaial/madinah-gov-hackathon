@@ -93,6 +93,12 @@
               <option value="Approved">مقبول</option>
               <option value="Rejected">مرفوض</option>
             </select>
+            <select v-model="filters.registration_type" class="input">
+              <option value="">جميع الأنواع</option>
+              <option value="Individual">فردي</option>
+              <option value="Team">فريق</option>
+              <option value="Organization">منظمة</option>
+            </select>
             <select v-model="filters.field" class="input">
               <option value="">جميع المجالات</option>
               <option value="ai">الذكاء الاصطناعي</option>
@@ -149,7 +155,9 @@
                       </div>
                     </div>
                     <div class="mr-4">
-                      <div class="text-sm font-medium text-gray-900">{{ participant.full_name }}</div>
+                      <div class="text-sm font-medium text-gray-900">
+                        {{ participant.full_name }} - {{ getRegistrationTypeName(participant.registration_type) }}
+                      </div>
                       <div class="text-sm text-gray-500">{{ participant.phone }}</div>
                     </div>
                   </div>
@@ -176,10 +184,10 @@
                     <button @click="viewParticipant(participant)" class="text-accent-500 hover:text-accent-700">
                       عرض
                     </button>
-                    <button v-if="participant.status === 'Pending'" @click="updateStatus(participant.id, 'Approved')" class="text-green-500 hover:text-green-700">
+                    <button v-if="participant.status === 'Pending'" @click="openEvaluationModal(participant)" class="text-green-500 hover:text-green-700">
                       قبول
                     </button>
-                    <button v-if="participant.status === 'Pending'" @click="updateStatus(participant.id, 'Rejected')" class="text-red-500 hover:text-red-700">
+                    <button v-if="participant.status === 'Pending'" @click="rejectParticipant(participant.id)" class="text-red-500 hover:text-red-700">
                       رفض
                     </button>
                   </div>
@@ -256,16 +264,91 @@
               <label class="block text-sm font-medium text-gray-700">فكرة المشروع</label>
               <p class="text-sm text-gray-900">{{ selectedParticipant.project_idea }}</p>
             </div>
+            <div v-if="(selectedParticipant.registration_type === 'Team' || selectedParticipant.registration_type === 'Organization') && selectedParticipant.team_members && selectedParticipant.team_members.length > 0">
+              <label class="block text-sm font-medium text-gray-700">
+                {{ selectedParticipant.registration_type === 'Team' ? 'أعضاء الفريق' : 'أعضاء المنظمة' }}
+              </label>
+              <div class="mt-2 space-y-2">
+                <div v-for="(member, index) in selectedParticipant.team_members" :key="member.id" class="flex items-center gap-2 bg-gray-50 rounded-lg p-2">
+                  <div class="w-6 h-6 rounded-full bg-accent-500 flex items-center justify-center text-white text-xs font-semibold">
+                    {{ index + 1 }}
+                  </div>
+                  <span class="text-sm text-gray-900">{{ member.name }}</span>
+                </div>
+              </div>
+            </div>
             <div v-if="selectedParticipant.cv_path">
               <label class="block text-sm font-medium text-gray-700">السيرة الذاتية</label>
               <button @click="downloadCv(selectedParticipant.id)" class="text-accent-500 underline">
                 تحميل السيرة الذاتية
               </button>
             </div>
+            <div v-if="selectedParticipant.evaluation">
+              <label class="block text-sm font-medium text-gray-700">نتيجة التحكيم</label>
+              <div class="bg-gray-50 rounded-lg p-3 mt-2">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-sm font-medium text-gray-700">النسبة:</span>
+                  <span class="text-lg font-bold text-primary-600">{{ selectedParticipant.evaluation.score }}%</span>
+                </div>
+                <div>
+                  <span class="text-sm font-medium text-gray-700">الوصف:</span>
+                  <p class="text-sm text-gray-900 mt-1">{{ selectedParticipant.evaluation.description }}</p>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="mt-6 flex justify-end">
             <button @click="selectedParticipant = null" class="btn btn-outline">
               إغلاق
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Evaluation Modal -->
+    <div v-if="showEvaluationModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+      <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+          <h3 class="text-lg font-medium text-gray-900 mb-4">تحكيم المشارك</h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">اسم المشارك</label>
+              <p class="text-sm text-gray-900 bg-gray-50 p-2 rounded">{{ evaluationParticipant?.full_name }}</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">النسبة المئوية *</label>
+              <input
+                v-model.number="evaluationForm.score"
+                type="number"
+                min="0"
+                max="100"
+                step="0.01"
+                class="input w-full"
+                placeholder="أدخل النسبة من 0 إلى 100"
+                :class="{ 'border-red-500': evaluationErrors.score }"
+              />
+              <p v-if="evaluationErrors.score" class="text-red-500 text-xs mt-1">{{ evaluationErrors.score }}</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">وصف التحكيم *</label>
+              <textarea
+                v-model="evaluationForm.description"
+                rows="4"
+                class="input w-full resize-none"
+                placeholder="اكتب وصف مفصل عن تقييم المشارك..."
+                :class="{ 'border-red-500': evaluationErrors.description }"
+              ></textarea>
+              <p v-if="evaluationErrors.description" class="text-red-500 text-xs mt-1">{{ evaluationErrors.description }}</p>
+            </div>
+          </div>
+          <div class="mt-6 flex justify-end gap-2">
+            <button @click="closeEvaluationModal" class="btn btn-outline">
+              إلغاء
+            </button>
+            <button @click="submitEvaluation" :disabled="evaluationLoading" class="btn btn-primary">
+              <span v-if="evaluationLoading">جاري القبول...</span>
+              <span v-else>قبول المشارك</span>
             </button>
           </div>
         </div>
@@ -293,9 +376,23 @@ const currentPage = ref(1);
 const perPage = ref(10);
 const totalParticipants = ref(0);
 
+// Evaluation Modal
+const showEvaluationModal = ref(false);
+const evaluationParticipant = ref<Participant | null>(null);
+const evaluationLoading = ref(false);
+const evaluationForm = reactive({
+  score: 0,
+  description: ''
+});
+const evaluationErrors = reactive({
+  score: '',
+  description: ''
+});
+
 const filters = reactive({
   search: '',
   status: '',
+  registration_type: '',
   field: ''
 });
 
@@ -321,6 +418,10 @@ const filteredParticipants = computed(() => {
     filtered = filtered.filter(p => p.status === filters.status);
   }
 
+  if (filters.registration_type) {
+    filtered = filtered.filter(p => p.registration_type === filters.registration_type);
+  }
+
   if (filters.field) {
     filtered = filtered.filter(p => p.field_of_interest === filters.field);
   }
@@ -340,14 +441,18 @@ async function loadParticipants() {
   try {
     const response = await apiService.getParticipants();
     if (response.success && response.data) {
-      // Support paginated response (data.data)
-      if (Array.isArray(response.data.data)) {
-        participants.value = response.data.data;
-        totalParticipants.value = response.data.total || response.data.data.length;
-      } else {
+      // Check if response has pagination structure
+      const responseData = response.data as any;
+      if (responseData && typeof responseData === 'object' && 'data' in responseData && Array.isArray(responseData.data)) {
+        participants.value = responseData.data;
+        totalParticipants.value = responseData.total || responseData.data.length;
+      } else if (Array.isArray(response.data)) {
         // Fallback: direct array
         participants.value = response.data;
         totalParticipants.value = response.data.length;
+      } else {
+        participants.value = [];
+        totalParticipants.value = 0;
       }
     }
   } catch (error: any) {
@@ -369,19 +474,6 @@ async function loadStatistics() {
     }
   } catch (error: any) {
     console.error('Failed to load statistics:', error);
-  }
-}
-
-async function updateStatus(participantId: number, status: string) {
-  try {
-    const response = await apiService.updateParticipantStatus(participantId, status);
-    if (response.success) {
-      uiStore.showAlert('success', 'تم تحديث الحالة بنجاح');
-      loadParticipants();
-      loadStatistics();
-    }
-  } catch (error: any) {
-    uiStore.showAlert('error', 'فشل في تحديث الحالة');
   }
 }
 
@@ -433,6 +525,15 @@ function getFieldName(field: string) {
   return fieldMap[field] || field;
 }
 
+function getRegistrationTypeName(registrationType: string) {
+  const typeMap: Record<string, string> = {
+    Individual: 'فردي',
+    Team: 'فريق',
+    Organization: 'منظمة'
+  };
+  return typeMap[registrationType] || registrationType;
+}
+
 function formatDate(date: string) {
   return new Date(date).toLocaleDateString('ar-SA');
 }
@@ -467,6 +568,85 @@ async function downloadCv(id: number) {
     window.URL.revokeObjectURL(url);
   } catch (error) {
     uiStore.showAlert('error', 'فشل في تحميل السيرة الذاتية');
+  }
+}
+
+function openEvaluationModal(participant: Participant) {
+  evaluationParticipant.value = participant;
+  showEvaluationModal.value = true;
+  // Reset form
+  evaluationForm.score = 0;
+  evaluationForm.description = '';
+  evaluationErrors.score = '';
+  evaluationErrors.description = '';
+}
+
+function closeEvaluationModal() {
+  showEvaluationModal.value = false;
+  evaluationParticipant.value = null;
+}
+
+function validateEvaluationForm(): boolean {
+  let isValid = true;
+  
+  // Reset errors
+  evaluationErrors.score = '';
+  evaluationErrors.description = '';
+  
+  // Validate score
+  if (!evaluationForm.score || evaluationForm.score < 0 || evaluationForm.score > 100) {
+    evaluationErrors.score = 'يجب إدخال نسبة صحيحة من 1 إلى 100';
+    isValid = false;
+  }
+  
+  // Validate description
+  if (!evaluationForm.description.trim() || evaluationForm.description.trim().length < 10) {
+    evaluationErrors.description = 'يجب إدخال وصف لا يقل عن 10 أحرف';
+    isValid = false;
+  }
+  
+  return isValid;
+}
+
+async function submitEvaluation() {
+  if (!validateEvaluationForm() || !evaluationParticipant.value) {
+    return;
+  }
+  
+  evaluationLoading.value = true;
+  try {
+    const response = await apiService.approveParticipant(evaluationParticipant.value.id, {
+      score: evaluationForm.score,
+      description: evaluationForm.description.trim()
+    });
+    
+    if (response.success) {
+      uiStore.showAlert('success', 'تم قبول المشارك وحفظ التحكيم بنجاح');
+      closeEvaluationModal();
+      loadParticipants();
+      loadStatistics();
+    }
+  } catch (error: any) {
+    uiStore.showAlert('error', 'فشل في قبول المشارك');
+  } finally {
+    evaluationLoading.value = false;
+  }
+}
+
+async function rejectParticipant(participantId: number) {
+  if (!confirm('هل أنت متأكد من رفض هذا المشارك؟')) {
+    return;
+  }
+  
+  try {
+    const response = await apiService.rejectParticipant(participantId);
+    if (response.success) {
+      uiStore.showAlert('success', 'تم رفض المشارك');
+      loadParticipants();
+      loadStatistics();
+    }
+  } catch (error: any) {
+    uiStore.showAlert('error', 'فشل في رفض المشارك');
   }
 }
 </script>

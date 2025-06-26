@@ -36,7 +36,7 @@ class Participant extends Model
         'age' => 'required|integer|min:16|max:100',
         'city' => 'required|string|max:255',
         'field_of_interest' => 'required|in:AI,Web Development,IoT,Mobile Development,Data Science,Cybersecurity,Blockchain,Other',
-        'registration_type' => 'required|in:Individual,Team',
+        'registration_type' => 'required|in:Individual,Team,Organization',
         'cv_path' => 'nullable|file|mimes:pdf|max:5120', // 5MB max
         'project_idea' => 'nullable|string|max:1000',
         'terms_accepted' => 'required|accepted',
@@ -58,6 +58,7 @@ class Participant extends Model
     public static $registrationTypeOptions = [
         'Individual' => 'Individual',
         'Team' => 'Team',
+        'Organization' => 'Organization',
     ];
 
     // Status options
@@ -77,5 +78,11 @@ class Participant extends Model
     public function teamMembers()
     {
         return $this->hasMany(TeamMember::class);
+    }
+
+    // Evaluation relationship
+    public function evaluation()
+    {
+        return $this->hasOne(Evaluation::class);
     }
 }

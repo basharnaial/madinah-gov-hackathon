@@ -14,7 +14,7 @@
       <div class="hidden md:flex items-center gap-8 flex-1 justify-center">
         <router-link to="/" class="text-white/90 text-lg font-semibold hover:text-accent-400 transition nav-link" :class="navLinkClass('/')">{{ $t('app.home') }}</router-link>
         <router-link to="/register" class="text-white/90 text-lg font-semibold hover:text-accent-400 transition nav-link" :class="navLinkClass('/register')">{{ $t('app.register') }}</router-link>
-        <a href="#contact" class="text-white/90 text-lg font-semibold hover:text-accent-400 transition nav-link">{{ $t('app.contact') }}</a>
+        <!-- <a href="#contact" class="text-white/90 text-lg font-semibold hover:text-accent-400 transition nav-link">{{ $t('app.contact') }}</a> -->
       </div>
       <!-- أزرار CTA -->
       <div class="hidden md:flex items-center gap-3">

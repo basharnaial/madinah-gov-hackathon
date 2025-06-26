@@ -52,35 +52,93 @@
             <p v-if="errors.registration_type" class="text-red-500 text-xs mt-1">{{ errors.registration_type[0] }}</p>
           </div>
           
-          <!-- Team Members Section (shows only when Team is selected) -->
-          <div v-if="form.registration_type === 'Team'" class="mt-6 p-4 bg-secondary-100 rounded-lg border">
-            <h3 class="text-lg font-semibold text-primary-600 mb-4">أعضاء الفريق</h3>
-            <p class="text-sm text-gray-600 mb-4">أضف أسماء أعضاء الفريق الإضافيين (غير مطلوب)</p>
+          <!-- Team Members Section (shows only when Team or Organization is selected) -->
+          <div v-if="form.registration_type === 'Team' || form.registration_type === 'Organization'" class="mt-6 p-4 bg-primary-50 rounded-lg border border-primary-200">
+            <div class="flex items-center gap-2 mb-4">
+              <svg class="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <h3 class="text-lg font-semibold text-primary-700">
+                {{ form.registration_type === 'Team' ? 'أعضاء الفريق' : 'أعضاء المنظمة' }}
+              </h3>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">
+              {{ form.registration_type === 'Team' 
+                ? 'أضف أسماء أعضاء الفريق الإضافيين (اختياري - يمكنك إضافة حتى 10 أعضاء)' 
+                : 'أضف أسماء أعضاء المنظمة الإضافيين (اختياري - يمكنك إضافة حتى 15 عضو)' 
+              }}
+            </p>
             
-            <div v-for="(member, index) in teamMembers" :key="index" class="mb-3 flex gap-2 items-center">
-              <input 
-                v-model="teamMembers[index]" 
-                type="text" 
-                :placeholder="`اسم العضو ${index + 1}`"
-                class="input flex-1"
-              />
-              <button 
-                @click="removeMember(index)" 
-                type="button" 
-                class="text-red-500 hover:text-red-700 px-2 py-1 text-sm"
-                :disabled="teamMembers.length === 1"
-              >
-                حذف
-              </button>
+            <div class="space-y-3">
+              <div v-for="(member, index) in teamMembers" :key="index" class="flex gap-2 items-center">
+                <div class="flex-shrink-0 w-8 h-8 bg-primary-500 text-white rounded-full flex items-center justify-center text-sm font-semibold">
+                  {{ index + 1 }}
+                </div>
+                <input 
+                  v-model="teamMembers[index]" 
+                  type="text" 
+                  :placeholder="`اسم ${form.registration_type === 'Team' ? 'عضو الفريق' : 'عضو المنظمة'} ${index + 1}`"
+                  class="input flex-1"
+                  maxlength="100"
+                />
+                <button 
+                  @click="removeMember(index)" 
+                  type="button" 
+                  class="flex-shrink-0 w-8 h-8 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-full flex items-center justify-center transition-colors"
+                  :disabled="teamMembers.length === 1"
+                  :title="teamMembers.length === 1 ? 'يجب أن يكون هناك عضو واحد على الأقل' : 'حذف العضو'"
+                >
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+              </div>
             </div>
             
-            <button 
-              @click="addMember" 
-              type="button" 
-              class="btn btn-outline text-sm mt-2"
-            >
-              إضافة عضو جديد
-            </button>
+            <div class="mt-4 flex items-center justify-between">
+              <button 
+                @click="addMember" 
+                type="button" 
+                class="btn btn-outline text-sm flex items-center gap-2"
+                :disabled="teamMembers.length >= getMaxMembers()"
+              >
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                إضافة {{ form.registration_type === 'Team' ? 'عضو فريق' : 'عضو منظمة' }} جديد
+              </button>
+              <span class="text-xs text-gray-500">
+                {{ teamMembers.length }} / {{ getMaxMembers() }} {{ form.registration_type === 'Team' ? 'أعضاء' : 'أعضاء' }}
+              </span>
+            </div>
+            
+            <!-- Quick add buttons for common team sizes -->
+            <div v-if="teamMembers.length === 1" class="mt-3 pt-3 border-t border-primary-200">
+              <p class="text-xs text-gray-500 mb-2">إضافة سريعة:</p>
+              <div class="flex gap-2 flex-wrap">
+                <button 
+                  @click="setTeamSize(3)" 
+                  type="button" 
+                  class="text-xs px-2 py-1 bg-primary-100 text-primary-700 rounded hover:bg-primary-200 transition-colors"
+                >
+                  {{ form.registration_type === 'Team' ? 'فريق من 3' : 'منظمة من 3' }}
+                </button>
+                <button 
+                  @click="setTeamSize(5)" 
+                  type="button" 
+                  class="text-xs px-2 py-1 bg-primary-100 text-primary-700 rounded hover:bg-primary-200 transition-colors"
+                >
+                  {{ form.registration_type === 'Team' ? 'فريق من 5' : 'منظمة من 5' }}
+                </button>
+                <button 
+                  @click="setTeamSize(7)" 
+                  type="button" 
+                  class="text-xs px-2 py-1 bg-primary-100 text-primary-700 rounded hover:bg-primary-200 transition-colors"
+                >
+                  {{ form.registration_type === 'Team' ? 'فريق من 7' : 'منظمة من 7' }}
+                </button>
+              </div>
+            </div>
           </div>
           
           <div>
@@ -141,16 +199,38 @@ const form = reactive({
 const errors = reactive<Record<string, string[]>>({});
 const loading = ref(false);
 
-// Team members array (only used when registration_type is 'Team')
+// Team members array (only used when registration_type is 'Team' or 'Organization')
 const teamMembers = ref<string[]>(['']);
 
+function getMaxMembers(): number {
+  return form.registration_type === 'Team' ? 10 : 15;
+}
+
 function addMember() {
-  teamMembers.value.push('');
+  if (teamMembers.value.length < getMaxMembers()) {
+    teamMembers.value.push('');
+  }
 }
 
 function removeMember(index: number) {
   if (teamMembers.value.length > 1) {
     teamMembers.value.splice(index, 1);
+  }
+}
+
+function setTeamSize(size: number) {
+  const maxMembers = getMaxMembers();
+  const targetSize = Math.min(size, maxMembers);
+  
+  if (targetSize > teamMembers.value.length) {
+    // Add empty members
+    const membersToAdd = targetSize - teamMembers.value.length;
+    for (let i = 0; i < membersToAdd; i++) {
+      teamMembers.value.push('');
+    }
+  } else if (targetSize < teamMembers.value.length) {
+    // Remove excess members (keeping filled ones if possible)
+    teamMembers.value = teamMembers.value.slice(0, targetSize);
   }
 }
 
@@ -203,7 +283,7 @@ async function onSubmit() {
     });
     
     // Add team members if registration type is Team
-    if (form.registration_type === 'Team') {
+    if (form.registration_type === 'Team' || form.registration_type === 'Organization') {
       const validTeamMembers = teamMembers.value.filter(name => name.trim() !== '');
       validTeamMembers.forEach((memberName, index) => {
         formData.append(`team_members[${index}]`, memberName.trim());

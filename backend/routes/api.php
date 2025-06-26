@@ -32,17 +32,18 @@ Route::prefix('registration')->group(function () {
 Route::prefix('admin')->group(function () {
     // Auth routes
     Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:admin');
     
     // Protected admin routes
-    Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware('auth:admin')->group(function () {
         Route::get('/profile', [AuthController::class, 'profile']);
         
         // Participant management
         Route::prefix('participants')->group(function () {
             Route::get('/', [ParticipantController::class, 'index']);
             Route::get('/{participant}', [ParticipantController::class, 'show']);
-            Route::patch('/{participant}/status', [ParticipantController::class, 'updateStatus']);
+            Route::post('/{participant}/approve', [ParticipantController::class, 'approve']);
+            Route::post('/{participant}/reject', [ParticipantController::class, 'reject']);
             Route::get('/{participant}/cv', [ParticipantController::class, 'downloadCv']);
             Route::get('/export/excel', [ParticipantController::class, 'exportToExcel']);
         });

@@ -28,7 +28,7 @@ class RegisterParticipantRequest extends FormRequest
             'age' => 'required|integer|min:16|max:100',
             'city' => 'required|string|max:255',
             'field_of_interest' => 'required|in:AI,Web Development,IoT,Mobile Development,Data Science,Cybersecurity,Blockchain,Other',
-            'registration_type' => 'required|in:Individual,Team',
+            'registration_type' => 'required|in:Individual,Team,Organization',
             'cv' => 'required|file|mimes:pdf|max:5120', // 5MB max
             'project_idea' => 'nullable|string|max:1000',
             'terms_accepted' => 'required|accepted',

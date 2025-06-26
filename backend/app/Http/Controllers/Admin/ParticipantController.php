@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Participant;
+use App\Models\Evaluation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ParticipantsExport;
 
@@ -17,7 +19,7 @@ class ParticipantController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $query = Participant::query();
+        $query = Participant::with(['teamMembers', 'evaluation']);
 
         // Apply filters
         if ($request->filled('registration_type')) {
@@ -66,6 +68,8 @@ class ParticipantController extends Controller
      */
     public function show(Participant $participant): JsonResponse
     {
+        $participant->load(['teamMembers', 'evaluation']);
+        
         return response()->json([
             'success' => true,
             'data' => $participant
@@ -73,21 +77,50 @@ class ParticipantController extends Controller
     }
 
     /**
-     * Update participant status
+     * Approve participant with evaluation
      */
-    public function updateStatus(Request $request, Participant $participant): JsonResponse
+    public function approve(Request $request, Participant $participant): JsonResponse
     {
         $request->validate([
-            'status' => 'required|in:Pending,Approved,Rejected',
+            'score' => 'required|numeric|min:0|max:100',
+            'description' => 'required|string|min:10|max:1000',
         ]);
 
+        // Create evaluation record
+        $evaluation = Evaluation::create([
+            'participant_id' => $participant->id,
+            'admin_id' => Auth::guard('admin')->id(),
+            'score' => $request->score,
+            'description' => $request->description,
+        ]);
+
+        // Update participant status to approved
         $participant->update([
-            'status' => $request->status
+            'status' => 'Approved'
+        ]);
+
+        // Load the evaluation relationship
+        $participant->load(['evaluation', 'teamMembers']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'تم قبول المشارك وحفظ التحكيم بنجاح',
+            'data' => $participant
+        ]);
+    }
+
+    /**
+     * Reject participant
+     */
+    public function reject(Request $request, Participant $participant): JsonResponse
+    {
+        $participant->update([
+            'status' => 'Rejected'
         ]);
 
         return response()->json([
             'success' => true,
-            'message' => 'تم تحديث حالة المشارك بنجاح',
+            'message' => 'تم رفض المشارك',
             'data' => $participant
         ]);
     }

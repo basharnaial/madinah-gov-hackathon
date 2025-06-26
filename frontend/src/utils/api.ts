@@ -99,10 +99,13 @@ class ApiService {
     return response.data;
   }
 
-  async updateParticipantStatus(id: number, status: string): Promise<ApiResponse<Participant>> {
-    const response: AxiosResponse<ApiResponse<Participant>> = await this.api.patch(`/admin/participants/${id}/status`, {
-      status,
-    });
+  async approveParticipant(id: number, evaluationData: { score: number; description: string }): Promise<ApiResponse<Participant>> {
+    const response: AxiosResponse<ApiResponse<Participant>> = await this.api.post(`/admin/participants/${id}/approve`, evaluationData);
+    return response.data;
+  }
+
+  async rejectParticipant(id: number): Promise<ApiResponse<Participant>> {
+    const response: AxiosResponse<ApiResponse<Participant>> = await this.api.post(`/admin/participants/${id}/reject`);
     return response.data;
   }
 
