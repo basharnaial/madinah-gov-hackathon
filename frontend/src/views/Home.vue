@@ -60,7 +60,7 @@
       <span class="text-accent-500 font-bold text-lg">{{ $t('app.event_sponsor') }}</span>
       <span class="text-primary-500 font-semibold">{{ $t('app.event_location') }}</span>
       <br>
-      <span class="text-accent-500 font-semibold mb-4">بالتعاون مع</span>
+      <span class="text-accent-500 font-semibold mb-4">{{ languageStore.currentLanguage === 'ar' ? 'بالتعاون مع' : 'In partnership with' }}</span>
 
       <img src="/UPM-logo.png" alt="شعار إمارة المدينة" class="w-32 mb-2" />
 
@@ -96,8 +96,11 @@
     </section>
 
     <!-- Goals Section -->
-    <div class="flex flex-col items-center">
-            <h2 class="text-2xl font-semibold text-primary-500 mb-4">{{ $t('admin.goals_title') }}</h2>        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 justify-center">
+        <!-- Goals Section -->
+    <section class="py-16 bg-white">
+      <div class="container-custom">
+        <h2 class="text-3xl font-bold text-primary-600 text-center mb-12">{{ $t('admin.goals_title') }}</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
           <!-- Goal 1 -->
           <div class="relative group cursor-pointer min-h-[110px] h-full"
                @mouseenter="activeTooltip = 0" @mouseleave="activeTooltip = null">
@@ -234,11 +237,11 @@
               <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
             </div>
           </div>
-        </div>
+                </div>
       </div>
+    </section>
 
-
-
+    <!-- Target Audiences Section -->
     <section class="py-16 bg-secondary-50 border-b border-gray-100">
       <div class="container-custom">
         <h2 class="text-2xl md:text-3xl font-bold text-primary-500 text-center mb-8">
@@ -272,7 +275,7 @@
     <!-- Vertical Timeline Section -->
     <section class="py-16 bg-white">
       <div class="container-custom">
-        <h2 class="text-3xl font-bold text-primary-600 text-center mb-12">مراحل المسابقة</h2>
+        <h2 class="text-3xl font-bold text-primary-600 text-center mb-12">{{ $t('admin.timeline_title') }}</h2>
         <div class="relative flex flex-col items-center">
           <!-- Vertical line in the center -->
           <div class="absolute left-1/2 top-0 w-1 bg-gradient-to-b from-accent-500 to-primary-600 h-full -translate-x-1/2 z-0"></div>
@@ -313,7 +316,7 @@
     <!-- FAQ Section -->
     <section class="py-16 bg-secondary-50 border-b border-gray-100">
       <div class="container-custom">
-        <h2 class="text-3xl font-bold text-primary-500 text-center mb-12">الأسئلة الشائعة</h2>
+        <h2 class="text-3xl font-bold text-primary-500 text-center mb-12">{{ $t('app.faq_title') }}</h2>
         <div class="max-w-3xl mx-auto space-y-4">
           <div v-for="faq in faqs" :key="faq.id" class="card rounded-2xl p-6 bg-white border border-gray-100 animate-fade-in delay-200">
             <button @click="toggleFaq(faq.id)" class="w-full text-right flex justify-between items-center focus:outline-none">
@@ -333,8 +336,8 @@
     <!-- CTA Section -->
     <section class="py-16 bg-accent-500 text-white relative overflow-hidden">
       <div class="container-custom text-center relative z-10">
-        <h2 class="text-3xl font-bold mb-4 animate-fade-in">جاهز للمشاركة؟</h2>
-        <p class="text-xl mb-8 opacity-90 animate-fade-in delay-100">سجل الآن وكن جزءاً من أكبر هاكاثون في المدينة المنورة</p>
+        <h2 class="text-3xl font-bold mb-4 animate-fade-in">{{ $t('app.cta_title') }}</h2>
+        <p class="text-xl mb-8 opacity-90 animate-fade-in delay-100">{{ $t('app.cta_subtitle') }}</p>
         <router-link to="/register" class="btn bg-white text-accent-500 hover:bg-gray-100 text-lg px-8 py-3 shadow-lg animate-fade-in delay-200">
           {{ $t('app.register') }}
         </router-link>
@@ -344,7 +347,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, nextTick } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useLanguageStore } from '@/stores/language';
 import { CogIcon, CheckCircleIcon, LightBulbIcon, TrophyIcon, UserGroupIcon, ChatBubbleLeftRightIcon, BuildingOfficeIcon } from '@heroicons/vue/24/solid';
@@ -504,36 +507,36 @@ const officialTimeline = [
   },
 ];
 
-const steps = [
+const steps = computed(() => [
   {
-    title: 'مرحلة استقبال الطلبات',
-    subtitle: 'يبدأ المشاركون بالتقديم من خلال رفع فيديو تعريفي عن أنفسهم وفكرتهم المقترحة.',
+    title: t('admin.timeline_step1_title'),
+    subtitle: t('admin.timeline_step1_subtitle'),
     description: '',
   },
   {
-    title: 'مرحلة التصفيات الأولى',
-    subtitle: 'يتم تقييم جميع المشاركات، وتأهيل 12 فريقاً من كل مسار للانتقال إلى الجولة الثانية.',
+    title: t('admin.timeline_step2_title'),
+    subtitle: t('admin.timeline_step2_subtitle'),
     description: '',
   },
   {
-    title: 'مرحلة ورش العمل والعروض التقديمية',
-    subtitle: 'يحضر الفرق المؤهلة 3 ورش عمل متخصصة لمساعدتهم في تطوير أفكارهم، يليها إعداد عرض تقديمي مفصل عن الحلول المقترحة.',
+    title: t('admin.timeline_step3_title'),
+    subtitle: t('admin.timeline_step3_subtitle'),
     description: '',
   },
   {
-    title: 'مرحلة التصفيات الثانية',
-    subtitle: 'بعد تقديم العروض، يتم اختيار أفضل 5 فرق من كل مسار للتأهل إلى المرحلة النهائية.',
+    title: t('admin.timeline_step4_title'),
+    subtitle: t('admin.timeline_step4_subtitle'),
     description: '',
   },
   {
-    title: 'مرحلة تطوير النماذج الأولية والعرض النهائي',
-    subtitle: '',
+    title: t('admin.timeline_step5_title'),
+    subtitle: t('admin.timeline_step5_subtitle'),
     description: '',
   },
-];
+]);
 
 // Reveal on scroll logic
-const stepsInView = ref<boolean[]>(Array(steps.length).fill(false));
+const stepsInView = ref<boolean[]>(Array(5).fill(false));
 const stepRefs = ref<HTMLElement[]>([]);
 function setStepRef(el: Element | ComponentPublicInstance | null, idx: number) {
   if (el instanceof HTMLElement) stepRefs.value[idx] = el;
@@ -565,28 +568,28 @@ onUnmounted(() => {
   if (observer) observer.disconnect();
 });
 
-const faqs = [
+const faqs = computed(() => [
   {
     id: 1,
-    question: 'من يمكنه المشاركة في الهاكاثون؟',
-    answer: 'يمكن للمطورين والمصممين ورواد الأعمال من جميع الأعمار المشاركة، سواء بشكل فردي أو كفريق.'
+    question: t('app.faq1_question'),
+    answer: t('app.faq1_answer')
   },
   {
     id: 2,
-    question: 'ما هي متطلبات المشاركة؟',
-    answer: 'يجب أن يكون عمر المشارك 16 سنة أو أكثر، وأن يكون لديه خبرة في مجال التقنية أو التصميم.'
+    question: t('app.faq2_question'),
+    answer: t('app.faq2_answer')
   },
   {
     id: 3,
-    question: 'هل هناك رسوم للمشاركة؟',
-    answer: 'لا، المشاركة مجانية تماماً. سيتم توفير الطعام والشراب طوال فترة الهاكاثون.'
+    question: t('app.faq3_question'),
+    answer: t('app.faq3_answer')
   },
   {
     id: 4,
-    question: 'ما هي الجوائز المتاحة؟',
-    answer: 'إجمالي الجوائز يصل إلى 100,000 ريال سعودي، بالإضافة إلى فرص عمل وشراكات استراتيجية.'
+    question: t('app.faq4_question'),
+    answer: t('app.faq4_answer')
   }
-];
+]);
 
 function toggleFaq(id: number) {
   openFaq.value = openFaq.value === id ? null : id;
