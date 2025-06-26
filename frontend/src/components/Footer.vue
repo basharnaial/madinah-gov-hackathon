@@ -1,21 +1,23 @@
 <template>
-  <footer class="bg-accent-500 text-secondary-500 py-8 mt-8">
-    <div class="container-custom flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
-      <!-- Contact Info -->
-      <div class="mb-4 md:mb-0">
-        <div class="text-lg font-bold mb-2">برمجان المدينة</div>
-        <div class="text-sm">Email: <a href="mailto:info@madinah-hackathon.com" class="underline hover:text-secondary-300">info@madinah-hackathon.com</a></div>
-        <div class="text-sm">Phone: <a href="tel:+966500000000" class="underline hover:text-secondary-300">+966 50 000 0000</a></div>
+  <footer class="bg-accent-1000  text-gray-700 pt-10 pb-6 mt-12 border-t-4 border-primary-600 shadow-inner">
+    <div class="container-custom flex flex-col md:flex-row md:items-start justify-between gap-8">
+      <!-- Title & Contact -->
+      <div class="flex-1 mb-6 md:mb-0">
+        <div class="text-2xl font-extrabold text-white mb-2 tracking-wide">برمجان المدينة</div>
+        <div class="flex flex-col gap-1 text-sm">
+          <div><span class="font-semibold text-accent-500">الهاتف:</span> <a href="tel:+966148155555" class="hover:underline text-white hover:text-accent-500 transition">014 815 5555 - آمر 199099</a></div>
+          <div><span class="font-semibold text-accent-500">البريد الإلكتروني:</span> <a href="mailto:info@almadinah.gov.sa" class="hover:underline text-white hover:text-accent-500 transition">info@almadinah.gov.sa</a></div>
+        </div>
       </div>
       <!-- Quick Links -->
-      <div class="flex flex-col gap-2 text-sm">
-        <a href="#" class="hover:underline">Terms</a>
-        <a href="#" class="hover:underline">Privacy Policy</a>
+      <div class="flex-1 flex flex-col gap-2 text-sm items-start md:items-end text-white">
+        <a href="#" class="font-semibold hover:underline text-white hover:text-accent-500 transition">المقترحات والملاحظات</a>
+        <a href="https://services.almadinah.gov.sa/Home/PrivacyPolicy" target="_blank" rel="noopener" class="hover:underline  hover:text-accent-500 transition">سياسة الخصوصية</a>
+        <a href="https://services.almadinah.gov.sa/Home/UsagePolicy" target="_blank" rel="noopener" class="hover:underline  hover:text-accent-500 transition">سياسة الإستخدام</a>
       </div>
-      <!-- Copyright -->
-      <div class="text-xs text-secondary-300 mt-4 md:mt-0 text-center md:text-right">
-        &copy; {{ new Date().getFullYear() }} Madinah Hackathon. All rights reserved.
-      </div>
+    </div>
+    <div class="container-custom mt-8 border-t border-gray-200 pt-4 text-xs text-accent-500 text-center">
+      &copy; {{ new Date().getFullYear() }} برمجان المدينة. جميع الحقوق محفوظة.
     </div>
   </footer>
 </template>

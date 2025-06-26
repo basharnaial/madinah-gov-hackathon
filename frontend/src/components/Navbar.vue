@@ -1,12 +1,11 @@
 <template>
   <nav :class="[isRTL ? 'rtl' : 'ltr', 'sticky top-0 z-30 w-full flex justify-center bg-transparent']">
-    <div class="w-full max-w-7xl flex items-center justify-between bg-[#92714e]   px-4 py-2 shadow-2xl">
+    <div class="w-full max-w-7xl flex items-center justify-between bg-accent-500   px-4 py-2 shadow-2xl">
       <!-- Logo & Title -->
       <router-link to="/" class="flex items-center gap-2">
-        <img src="/logo.svg" alt="Madinah Hackathon Logo" class="h-10 w-10" />
         <div class="flex flex-col items-end">
-          <span class="text-xl font-extrabold tracking-tight text-white">برمجان المدينة</span>
-          <span class="text-xs text-white/60 font-bold">Madinah Hackathon</span>
+          <img src="/Logo-ar.png" style="filter: brightness(0) invert(1);" alt="Madinah Hackathon Logo" class="h-14 w-38" />
+
         </div>
       </router-link>
       <!-- فاصل عمودي -->
@@ -37,7 +36,7 @@
       </button>
     </div>
     <!-- Mobile Menu -->
-    <div v-if="mobileOpen" class="md:hidden bg-[#0a0a3c] border-t border-white/10 px-4 pb-4 rounded-b-2xl shadow-2xl mx-2">
+    <div v-if="mobileOpen" class="md:hidden bg-gray-900 border-t border-white/10 px-4 pb-4 rounded-b-2xl shadow-2xl mx-2">
       <router-link to="/" class="block py-2 nav-link text-white/90 text-lg font-semibold hover:text-accent-400 transition" :class="navLinkClass('/')" @click="mobileOpen = false">{{ $t('app.home') }}</router-link>
       <router-link to="/register" class="block py-2 nav-link text-white/90 text-lg font-semibold hover:text-accent-400 transition" :class="navLinkClass('/register')" @click="mobileOpen = false">{{ $t('app.register') }}</router-link>
       <a href="#contact" class="block py-2 nav-link text-white/90 text-lg font-semibold hover:text-accent-400 transition" @click="mobileOpen = false">{{ $t('app.contact') }}</a>

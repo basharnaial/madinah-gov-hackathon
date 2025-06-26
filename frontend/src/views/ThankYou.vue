@@ -1,6 +1,6 @@
 <template>
   <div class="container-custom py-20 max-w-2xl mx-auto">
-    <div class="card text-center">
+    <div class="text-center bg-gradient-to-br from-secondary-500 to-secondary-300 border-2 border-accent-500">
       <div class="mb-6">
         <div class="w-20 h-20 bg-accent-500 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -52,11 +52,4 @@ const { t } = useI18n();
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-</script>
-
-<style scoped>
-.card {
-  background: linear-gradient(135deg, #e8d9bb 0%, #f5ecd3 100%);
-  border: 2px solid #b99166;
-}
-</style> 
+</script> 

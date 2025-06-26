@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-secondary-500 to-secondary-300 py-24 md:py-32 overflow-hidden">
+    <section class="relative bg-gradient-to-br from-secondary-500 to-secondary-300 py-18 md:py-20 overflow-hidden">
       <!-- Emara Pattern كخلفية كاملة للهيرو -->
       <img
         src="/Emara-bg.svg"
@@ -18,20 +18,19 @@
         </p>
         <!-- Countdown Timer -->
         <div
-          class="mx-auto mt-10 mb-6 max-w-3xl rounded-3xl shadow-lg flex flex-wrap justify-center items-center gap-0 bg-gradient-to-r from-[#b99166] to-[#aaccbd] p-6"
-          style="background: linear-gradient(90deg, #b99166 0%, #e8d9bb 100%);"
+          class="mx-auto mt-10 mb-6 max-w-3xl rounded-3xl shadow-lg flex flex-wrap justify-center items-center gap-0 bg-gradient-to-r from-accent-500 to-muted-300 p-6"
         >
           <div
             v-for="(item, idx) in countdown"
             :key="item.label"
             class="flex flex-col items-center flex-1"
-            :style="{ borderLeft: idx !== 0 ? '1px dashed #467D61' : 'none' }"
+            :class="idx !== 0 ? 'border-l border-dashed border-primary-600' : ''"
           >
-            <span class="text-4xl md:text-5xl font-extrabold text-[#467D61]">{{ item.value }}</span>
-            <span class="text-lg md:text-xl font-bold text-[#b99166] mt-1">{{ $t(item.label) }}</span>
+            <span class="text-4xl md:text-5xl font-extrabold text-primary-600">{{ item.value }}</span>
+            <span class="text-lg md:text-xl font-bold text-accent-500 mt-1">{{ $t(item.label) }}</span>
           </div>
         </div>
-        <p class="text-center  text-[#467D61] font-semibold text-sm mb-2">
+        <p class="text-center  text-primary-600 font-semibold text-sm mb-2">
           {{ $t('app.registration_closes') }} {{ $t('app.event_date') }}
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in delay-200">
@@ -134,41 +133,42 @@
 
     <!-- شعار الإمارة وعبارة ترحيبية -->
     <div class="flex flex-col items-center mb-2 pt-6 animate-fade-in">
-      <img src="/logo.svg" alt="شعار إمارة المدينة" class="w-20 mb-2" />
+      <img src="/imarat-logo.png" alt="شعار إمارة المدينة" class="w-32 mb-2" />
       <span class="text-accent-500 font-bold text-lg">{{ $t('app.event_sponsor') }}</span>
       <span class="text-primary-500 font-semibold">{{ $t('app.event_location') }}</span>
     </div>
 
     <!-- About Section -->
-    <section id="about" class="py-16 bg-white border-b border-gray-100">
-      <div class="container-custom">
-        <h2 class="text-3xl font-bold text-primary-500 text-center mb-12">{{ $t('app.about_title') }}</h2>
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h3 class="text-2xl font-semibold text-primary-500 mb-4">{{ $t('app.about_subtitle') }}</h3>
-            <p class="text-gray-700 mb-6 leading-relaxed">
-              {{ $t('app.about_description') }}
-            </p>
-            <ul class="space-y-2 text-gray-700">
-              <li class="flex items-center gap-2">
-                <span class="w-2 h-2 bg-accent-500 rounded-full"></span>
-                <span>{{ $t('app.feature1') }}</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="w-2 h-2 bg-accent-500 rounded-full"></span>
-                <span>{{ $t('app.feature2') }}</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="w-2 h-2 bg-accent-500 rounded-full"></span>
-                <span>{{ $t('app.feature3') }}</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="w-2 h-2 bg-accent-500 rounded-full"></span>
-                <span>{{ $t('app.feature4') }}</span>
-              </li>
-            </ul>
-          </div>
-          <div class="">
+    <section id="about" class="py-16 bg-gradient-to-br from-secondary-100 to-white border-b border-gray-100">
+      <div class="max-w-3xl mx-auto bg-white/80 rounded-3xl shadow-lg px-8 py-12 text-center">
+        <h2 class="text-4xl font-extrabold text-primary-600 mb-4 drop-shadow-sm">{{ $t('app.about_title') }}</h2>
+        <h3 class="text-2xl font-semibold text-primary-500 mb-6">{{ $t('app.about_subtitle') }}</h3>
+        <p class="text-gray-700 mb-8 leading-relaxed text-lg">
+          {{ $t('app.about_description') }}
+        </p>
+        <ul class="flex flex-wrap justify-center gap-4 mt-8">
+          <li class="flex items-center gap-3 bg-secondary-100 rounded-xl px-5 py-3 shadow-sm min-w-[220px]">
+            <span class="w-3 h-3 bg-accent-500 rounded-full"></span>
+            <span class="text-gray-800 font-medium">{{ $t('app.feature1') }}</span>
+          </li>
+          <li class="flex items-center gap-3 bg-secondary-100 rounded-xl px-5 py-3 shadow-sm min-w-[220px]">
+            <span class="w-3 h-3 bg-accent-500 rounded-full"></span>
+            <span class="text-gray-800 font-medium">{{ $t('app.feature2') }}</span>
+          </li>
+          <li class="flex items-center gap-3 bg-secondary-100 rounded-xl px-5 py-3 shadow-sm min-w-[220px]">
+            <span class="w-3 h-3 bg-accent-500 rounded-full"></span>
+            <span class="text-gray-800 font-medium">{{ $t('app.feature3') }}</span>
+          </li>
+          <li class="flex items-center gap-3 bg-secondary-100 rounded-xl px-5 py-3 shadow-sm min-w-[220px]">
+            <span class="w-3 h-3 bg-accent-500 rounded-full"></span>
+            <span class="text-gray-800 font-medium">{{ $t('app.feature4') }}</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Goals Section -->
+    <div class="flex flex-col items-center">
             <h2 class="text-2xl font-semibold text-primary-500 mb-4">{{ $t('admin.goals_title') }}</h2>        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 justify-center">
           <!-- هدف 1 -->
           <div class="relative group cursor-pointer min-h-[110px] h-full"
@@ -309,9 +309,6 @@
         </div>
       </div>
 
-        </div>
-      </div>
-    </section>
 
 
     <section class="py-16 bg-secondary-50 border-b border-gray-100">
@@ -347,10 +344,10 @@
     <!-- Vertical Timeline Section -->
     <section class="py-16 bg-white">
       <div class="container-custom">
-        <h2 class="text-3xl font-bold text-[#467D61] text-center mb-12">مراحل المسابقة</h2>
+        <h2 class="text-3xl font-bold text-primary-600 text-center mb-12">مراحل المسابقة</h2>
         <div class="relative flex flex-col items-center">
           <!-- الخط العمودي في المنتصف -->
-          <div class="absolute left-1/2 top-0 w-1 bg-gradient-to-b from-[#b99166] to-[#467D61] h-full -translate-x-1/2 z-0"></div>
+          <div class="absolute left-1/2 top-0 w-1 bg-gradient-to-b from-accent-500 to-primary-600 h-full -translate-x-1/2 z-0"></div>
           <div
             v-for="(step, idx) in steps"
             :key="idx"
@@ -361,14 +358,14 @@
             <!-- الكارد: تناوب يمين/يسار -->
             <div class="w-1/2 flex" :class="idx % 2 === 0 ? 'justify-end pr-8' : 'justify-start pl-8'">
               <div
-                class="bg-[#e8d9bb] rounded-xl shadow-lg p-6 text-right max-w-md transition-all duration-700"
+                class="bg-secondary-500 rounded-xl shadow-lg p-6 text-right max-w-md transition-all duration-700"
                 :class="[
-                  idx % 2 === 0 ? 'mr-auto border-l-8 border-[#b99166]' : 'ml-auto border-r-8 border-[#467D61]',
+                  idx % 2 === 0 ? 'mr-auto border-l-8 border-accent-500' : 'ml-auto border-r-8 border-primary-600',
                   stepsInView[idx] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 ]"
               >
-                <div class="text-lg font-bold text-[#467D61] mb-2">{{ step.title }}</div>
-                <div v-if="step.subtitle" class="text-sm font-semibold text-[#b99166] mb-2">{{ step.subtitle }}</div>
+                <div class="text-lg font-bold text-primary-600 mb-2">{{ step.title }}</div>
+                <div v-if="step.subtitle" class="text-sm font-semibold text-accent-500 mb-2">{{ step.subtitle }}</div>
                 <div v-if="step.description" class="text-gray-700 text-sm leading-relaxed">{{ step.description }}</div>
               </div>
             </div>
@@ -376,8 +373,8 @@
             <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 transition-all duration-700"
               :class="stepsInView[idx] ? 'opacity-100 scale-100' : 'opacity-0 scale-75'"
             >
-              <div class="w-12 h-12 rounded-full bg-white border-4 border-[#467D61] flex items-center justify-center shadow-lg ring-4 ring-[#aaccbd] animate-pulse">
-                <span class="text-2xl font-bold text-[#467D61]">{{ idx + 1 }}</span>
+              <div class="w-12 h-12 rounded-full bg-white border-4 border-primary-600 flex items-center justify-center shadow-lg ring-4 ring-muted-300 animate-pulse">
+                <span class="text-2xl font-bold text-primary-600">{{ idx + 1 }}</span>
               </div>
             </div>
           </div>
@@ -808,5 +805,17 @@ function scrollToAbout() {
 }
 .hero-bg-animate {
   animation: float-bg 8s ease-in-out infinite;
+}
+.to-muted-300 {
+    --tw-gradient-to: #ffe2a4 var(--tw-gradient-to-position);
+}
+.from-accent-500 {
+    --tw-gradient-from: #fff1e1 var(--tw-gradient-from-position);
+}
+.from-primary-500 {
+  --tw-gradient-from: #d6bfa6 var(--tw-gradient-from-position);
+}
+.to-accent-500 {
+    --tw-gradient-to: #b89066 var(--tw-gradient-to-position);
 }
 </style>
