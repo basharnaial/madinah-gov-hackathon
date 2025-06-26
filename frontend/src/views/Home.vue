@@ -10,15 +10,15 @@
         style="object-fit: cover;"
       />
       <div class="container-custom text-center relative z-10">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-muted-600 text-primary-600 mb-6 drop-shadow-sm animate-fade-in">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-muted-600 text-primary-600 mb-6 drop-shadow-sm animate-scale-in">
           {{ $t('app.hero_title') }}
         </h1>
-        <p class="text-xl md:text-2xl text-gray-700 mb-10 max-w-3xl mx-auto animate-fade-in delay-100">
+        <p class="text-xl md:text-2xl text-gray-700 mb-10 max-w-3xl mx-auto animate-fade-in delay-200">
           {{ $t('app.hero_subtitle') }}
         </p>
         <!-- Countdown Timer -->
         <div
-          class="mx-auto mt-10 mb-6 max-w-3xl rounded-3xl shadow-lg flex flex-wrap justify-center items-center gap-0 bg-gradient-to-r from-accent-500 to-muted-300 p-6"
+          class="countdown-container mx-auto mt-10 mb-6 max-w-3xl rounded-3xl shadow-lg flex flex-wrap justify-center items-center gap-0 bg-gradient-to-r from-accent-500 to-muted-300 p-6 animate-bounce-in delay-400"
         >
           <div
             v-for="(item, idx) in countdown"
@@ -26,14 +26,14 @@
             class="flex flex-col items-center flex-1"
             :class="idx !== 0 ? 'border-l border-dashed border-primary-600' : ''"
           >
-            <span class="text-4xl md:text-5xl font-extrabold text-primary-600">{{ item.value }}</span>
-            <span class="text-lg md:text-xl font-bold text-accent-500 mt-1">{{ $t(item.label) }}</span>
+            <span class="countdown-number text-4xl md:text-5xl font-extrabold text-primary-600 animate-number-count">{{ item.value }}</span>
+            <span class="text-lg md:text-xl font-bold text-accent-500 mt-1 animate-slide-down">{{ $t(item.label) }}</span>
           </div>
         </div>
         <p class="text-center  text-primary-600 font-semibold text-sm mb-2">
           {{ $t('app.registration_closes') }} {{ $t('app.event_date') }}
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in delay-200">
+        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in delay-600">
 
 
           <router-link
@@ -53,7 +53,7 @@
     <div class="flex flex-col items-center mb-2 pt-6 animate-fade-in">
 
       <div class="gap-4 mb-2">
-        <img src="/imarat-logo.png" alt="شعار إمارة المدينة" class="w-32 mb-2" />
+        <img src="/imarat-logo.png" alt="شعار إمارة المدينة" class="w-32 mb-2 logo-float animate-scale-in delay-800" />
       </div>
       
 
@@ -62,13 +62,13 @@
       <br>
       <span class="text-accent-500 font-semibold mb-4">{{ languageStore.currentLanguage === 'ar' ? 'بالتعاون مع' : 'In partnership with' }}</span>
 
-      <img src="/UPM-logo.png" alt="شعار إمارة المدينة" class="w-32 mb-2" />
+      <img src="/UPM-logo.png" alt="شعار إمارة المدينة" class="w-32 mb-2 logo-float animate-scale-in delay-700" />
 
     </div>
 
     <!-- About Section -->
     <section id="about" class="py-16 bg-gradient-to-br from-secondary-100 to-white border-b border-gray-100">
-      <div class="max-w-3xl mx-auto bg-white/80 rounded-3xl shadow-lg px-8 py-12 text-center">
+      <div class="max-w-3xl mx-auto bg-white/80 rounded-3xl shadow-lg px-8 py-12 text-center animate-fade-in delay-300">
         <h2 class="text-4xl font-extrabold text-primary-600 mb-4 drop-shadow-sm">{{ $t('app.about_title') }}</h2>
         <h3 class="text-2xl font-semibold text-primary-500 mb-6">{{ $t('app.about_subtitle') }}</h3>
         <p class="text-gray-700 mb-8 leading-relaxed text-lg">
@@ -102,9 +102,9 @@
         <h2 class="text-3xl font-bold text-primary-600 text-center mb-12">{{ $t('admin.goals_title') }}</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
           <!-- Goal 1 -->
-          <div class="relative group cursor-pointer min-h-[110px] h-full"
+          <div class="relative group cursor-pointer min-h-[110px] h-full animate-fade-in delay-100"
                @mouseenter="activeTooltip = 0" @mouseleave="activeTooltip = null">
-            <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
+            <div class="goal-card bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
               <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center mb-2 shadow-md">
                 <CogIcon class="w-6 h-6 text-white" />
               </div>
@@ -119,9 +119,9 @@
             </div>
           </div>
           <!-- Goal 2 -->
-          <div class="relative group cursor-pointer min-h-[110px] h-full"
+          <div class="relative group cursor-pointer min-h-[110px] h-full animate-fade-in delay-200"
                @mouseenter="activeTooltip = 1" @mouseleave="activeTooltip = null">
-            <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
+            <div class="goal-card bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
               <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center mb-2 shadow-md">
                 <CheckCircleIcon class="w-6 h-6 text-white" />
               </div>
@@ -136,9 +136,9 @@
             </div>
           </div>
           <!-- Goal 3 -->
-          <div class="relative group cursor-pointer min-h-[110px] h-full"
+          <div class="relative group cursor-pointer min-h-[110px] h-full animate-fade-in delay-300"
                @mouseenter="activeTooltip = 2" @mouseleave="activeTooltip = null">
-            <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
+            <div class="goal-card bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
               <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center mb-2 shadow-md">
                 <LightBulbIcon class="w-6 h-6 text-white" />
               </div>
@@ -153,9 +153,9 @@
             </div>
           </div>
           <!-- Goal 4 -->
-          <div class="relative group cursor-pointer min-h-[110px] h-full"
+          <div class="relative group cursor-pointer min-h-[110px] h-full animate-fade-in delay-400"
                @mouseenter="activeTooltip = 3" @mouseleave="activeTooltip = null">
-            <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
+            <div class="goal-card bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
               <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center mb-2 shadow-md">
                 <TrophyIcon class="w-6 h-6 text-white" />
               </div>
@@ -170,9 +170,9 @@
             </div>
           </div>
           <!-- Goal 5 -->
-          <div class="relative group cursor-pointer min-h-[110px] h-full"
+          <div class="relative group cursor-pointer min-h-[110px] h-full animate-fade-in delay-500"
                @mouseenter="activeTooltip = 4" @mouseleave="activeTooltip = null">
-            <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
+            <div class="goal-card bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
               <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center mb-2 shadow-md">
                 <UserGroupIcon class="w-6 h-6 text-white" />
               </div>
@@ -187,9 +187,9 @@
             </div>
           </div>
           <!-- Goal 6 -->
-          <div class="relative group cursor-pointer min-h-[110px] h-full"
+          <div class="relative group cursor-pointer min-h-[110px] h-full animate-fade-in delay-600"
                @mouseenter="activeTooltip = 5" @mouseleave="activeTooltip = null">
-            <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
+            <div class="goal-card bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
               <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center mb-2 shadow-md">
                 <BuildingOfficeIcon class="w-6 h-6 text-white" />
               </div>
@@ -204,9 +204,9 @@
             </div>
           </div>
           <!-- Goal 7 -->
-          <div class="relative group cursor-pointer min-h-[110px] h-full"
+          <div class="relative group cursor-pointer min-h-[110px] h-full animate-fade-in delay-700"
                @mouseenter="activeTooltip = 6" @mouseleave="activeTooltip = null">
-            <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
+            <div class="goal-card bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
               <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center mb-2 shadow-md">
                 <UserGroupIcon class="w-6 h-6 text-white" />
               </div>
@@ -221,9 +221,9 @@
             </div>
           </div>
           <!-- Goal 8 -->
-          <div class="relative group cursor-pointer min-h-[110px] h-full"
+          <div class="relative group cursor-pointer min-h-[110px] h-full animate-fade-in delay-800"
                @mouseenter="activeTooltip = 7" @mouseleave="activeTooltip = null">
-            <div class="bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
+            <div class="goal-card bg-white rounded-lg p-3 text-center shadow hover:shadow-lg transition-all border border-gray-100 flex flex-col items-center h-full">
               <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center mb-2 shadow-md">
                 <ChatBubbleLeftRightIcon class="w-6 h-6 text-white" />
               </div>
@@ -249,19 +249,19 @@
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <!-- Government entities -->
-          <div class="bg-secondary-50 rounded-xl shadow hover:shadow-lg transition-all border border-gray-100 p-6 flex flex-col items-center text-center">
+          <div class="bg-secondary-50 rounded-xl shadow hover:shadow-lg transition-all border border-gray-100 p-6 flex flex-col items-center text-center animate-fade-in-left delay-100">
             <BuildingOfficeIcon class="w-10 h-10 text-accent-500 mb-3" />
             <div class="font-bold text-primary-600 text-lg mb-1">{{ $t('app.target_audiences_gov') }}</div>
             <div class="text-gray-600 text-sm">{{ $t('app.target_audiences_gov_desc') }}</div>
           </div>
           <!-- Professionals and innovators -->
-          <div class="bg-secondary-50 rounded-xl shadow hover:shadow-lg transition-all border border-gray-100 p-6 flex flex-col items-center text-center">
+          <div class="bg-secondary-50 rounded-xl shadow hover:shadow-lg transition-all border border-gray-100 p-6 flex flex-col items-center text-center animate-scale-in delay-200">
             <LightBulbIcon class="w-10 h-10 text-accent-500 mb-3" />
             <div class="font-bold text-primary-600 text-lg mb-1">{{ $t('app.target_audiences_pro') }}</div>
             <div class="text-gray-600 text-sm">{{ $t('app.target_audiences_pro_desc') }}</div>
           </div>
           <!-- Students and recent graduates -->
-          <div class="bg-secondary-50 rounded-xl shadow hover:shadow-lg transition-all border border-gray-100 p-6 flex flex-col items-center text-center">
+          <div class="bg-secondary-50 rounded-xl shadow hover:shadow-lg transition-all border border-gray-100 p-6 flex flex-col items-center text-center animate-fade-in-right delay-300">
             <UserGroupIcon class="w-10 h-10 text-accent-500 mb-3" />
             <div class="font-bold text-primary-600 text-lg mb-1">{{ $t('app.target_audiences_students') }}</div>
             <div class="text-gray-600 text-sm">{{ $t('app.target_audiences_students_desc') }}</div>
@@ -318,7 +318,7 @@
       <div class="container-custom">
         <h2 class="text-3xl font-bold text-primary-500 text-center mb-12">{{ $t('app.faq_title') }}</h2>
         <div class="max-w-3xl mx-auto space-y-4">
-          <div v-for="faq in faqs" :key="faq.id" class="card rounded-2xl p-6 bg-white border border-gray-100 animate-fade-in delay-200">
+          <div v-for="(faq, index) in faqs" :key="faq.id" class="faq-item card rounded-2xl p-6 bg-white border border-gray-100 animate-fade-in" :class="`delay-${(index + 1) * 100}`">
             <button @click="toggleFaq(faq.id)" class="w-full text-right flex justify-between items-center focus:outline-none">
               <h3 class="text-lg font-semibold text-primary-500">{{ faq.question }}</h3>
               <svg :class="['w-5 h-5 text-primary-500 transition-transform', { 'rotate-180': openFaq === faq.id }]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -336,9 +336,9 @@
     <!-- CTA Section -->
     <section class="py-16 bg-accent-500 text-white relative overflow-hidden">
       <div class="container-custom text-center relative z-10">
-        <h2 class="text-3xl font-bold mb-4 animate-fade-in">{{ $t('app.cta_title') }}</h2>
-        <p class="text-xl mb-8 opacity-90 animate-fade-in delay-100">{{ $t('app.cta_subtitle') }}</p>
-        <router-link to="/register" class="btn bg-white text-accent-500 hover:bg-gray-100 text-lg px-8 py-3 shadow-lg animate-fade-in delay-200">
+        <h2 class="text-3xl font-bold mb-4 animate-scale-in">{{ $t('app.cta_title') }}</h2>
+        <p class="text-xl mb-8 opacity-90 animate-fade-in delay-200">{{ $t('app.cta_subtitle') }}</p>
+        <router-link to="/register" class="btn bg-white text-accent-500 hover:bg-gray-100 text-lg px-8 py-3 shadow-lg animate-bounce-in delay-400">
           {{ $t('app.register') }}
         </router-link>
       </div>
@@ -362,10 +362,10 @@ const activeTooltip = ref<number | null>(null);
 // Countdown Timer logic
 const targetDate = new Date('2025-07-12T23:59:59');
 const countdown = ref([
-  { label: 'يوم', value: 0 },
-  { label: 'ساعة', value: 0 },
-  { label: 'دقيقة', value: 0 },
-  { label: 'ثانية', value: 0 },
+  { label: 'app.days', value: 0 },
+  { label: 'app.hours', value: 0 },
+  { label: 'app.minutes', value: 0 },
+  { label: 'app.seconds', value: 0 },
 ]);
 
 function updateCountdown() {
@@ -380,10 +380,10 @@ function updateCountdown() {
   const seconds = Math.floor(diff / 1000);
 
   countdown.value = [
-    { label: 'يوم', value: days },
-    { label: 'ساعة', value: hours },
-    { label: 'دقيقة', value: minutes },
-    { label: 'ثانية', value: seconds },
+    { label: 'app.days', value: days },
+    { label: 'app.hours', value: hours },
+    { label: 'app.minutes', value: minutes },
+    { label: 'app.seconds', value: seconds },
   ];
 }
 
@@ -612,29 +612,249 @@ function scrollToAbout() {
   transition: all 0.3s ease;
 }
 
-/* Simple fade-in animation */
+/* Enhanced fade-in animation with smooth easing */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: none; }
+  from { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
 }
+
+@keyframes fade-in-left {
+  from { 
+    opacity: 0; 
+    transform: translateX(-30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+@keyframes fade-in-right {
+  from { 
+    opacity: 0; 
+    transform: translateX(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+@keyframes scale-in {
+  from { 
+    opacity: 0; 
+    transform: scale(0.8); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+@keyframes slide-down {
+  from { 
+    opacity: 0; 
+    transform: translateY(-20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes bounce-in {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.3); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.05); 
+  }
+  70% { 
+    transform: scale(0.9); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+@keyframes float-bg {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(1deg); }
+  50% { transform: translateY(-20px) rotate(0deg); }
+  75% { transform: translateY(-10px) rotate(-1deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(184, 144, 102, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(184, 144, 102, 0.5);
+  }
+}
+
+@keyframes number-count {
+  from { 
+    transform: scale(0.8) rotateY(90deg);
+    opacity: 0;
+  }
+  to { 
+    transform: scale(1) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+/* Animation classes */
 .animate-fade-in {
-  animation: fade-in 0.8s cubic-bezier(0.4,0,0.2,1) both;
+  animation: fade-in 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.animate-fade-in-left {
+  animation: fade-in-left 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.animate-fade-in-right {
+  animation: fade-in-right 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.animate-number-count {
+  animation: number-count 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 /* Delay utilities for staggered animations */
 .delay-100 { animation-delay: 0.1s; }
 .delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
 
-/* Hide z-1 warning for decorative shapes */
-.-z-1 { z-index: -1; }
-
-@keyframes float-bg {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
+/* Enhanced background animation */
 .hero-bg-animate {
-  animation: float-bg 8s ease-in-out infinite;
+  animation: float-bg 12s ease-in-out infinite;
 }
+
+/* Countdown timer enhancements */
+.countdown-container {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.countdown-number {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.countdown-number:hover {
+  transform: scale(1.1);
+}
+
+/* Goal cards hover effects */
+.goal-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.goal-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Timeline step animations */
+.timeline-step {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-step.in-view {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.timeline-step:not(.in-view) {
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+/* FAQ accordion smooth animations */
+.faq-item {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Button hover enhancements */
+.btn {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Section reveal animations */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Logo animations */
+/* .logo-float {
+  animation: float-bg 6s ease-in-out infinite;
+} */
+
+/* Gradient color definitions */
 .to-muted-300 {
     --tw-gradient-to: #ffe2a4 var(--tw-gradient-to-position);
 }
@@ -647,4 +867,7 @@ function scrollToAbout() {
 .to-accent-500 {
     --tw-gradient-to: #b89066 var(--tw-gradient-to-position);
 }
+
+/* Hide z-1 warning for decorative shapes */
+.-z-1 { z-index: -1; }
 </style>

@@ -69,14 +69,14 @@
     "faq4_answer": "Total prizes reach 100,000 Saudi Riyals, in addition to job opportunities and strategic partnerships.",
     "cta_title": "Ready to Participate?",
     "cta_subtitle": "Register now and be part of the biggest hackathon in Madinah",
-    "event_sponsor": "Sponsored by Madinah Province Emirate",
-    "event_location": "In the land of Taybah",
-    "registration_closes": "Registration closes",
+    "event_sponsor": "Sponsored by Emirate of Madinah",
+    "event_location": "Madinah, Kingdom of Saudi Arabia",
+    "registration_closes": "Registration closes on",
     "event_date": "2025-07-12",
-    "days": "Day",
-    "hours": "Hour",
-    "minutes": "Minute",
-    "seconds": "Second",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
     "target_audiences_title": "Target Audiences",
     "target_audiences_gov": "Government Entities",
     "target_audiences_gov_desc": "Includes ministries, authorities, and government institutions seeking to develop their digital services.",
@@ -174,5 +174,12 @@
     "privacy_policy": "Privacy Policy",
     "usage_policy": "Usage Policy",
     "copyright": "Madinah Hackathon. All rights reserved."
+  },
+  "thankyou": {
+    "next_steps": "What's Next?",
+    "step1": "Your application will be reviewed by the organizing team",
+    "step2": "You will receive a notification via email when your application is approved",
+    "step3": "Additional details about the event and schedule will be sent",
+    "scroll_to_top": "Back to Top"
   }
 } 
