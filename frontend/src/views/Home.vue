@@ -10,7 +10,7 @@
         style="object-fit: cover;"
       />
       <div class="container-custom text-center relative z-10">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-primary-600 mb-6 drop-shadow-sm animate-fade-in">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-muted-600 text-primary-600 mb-6 drop-shadow-sm animate-fade-in">
           {{ $t('app.hero_title') }}
         </h1>
         <p class="text-xl md:text-2xl text-gray-700 mb-10 max-w-3xl mx-auto animate-fade-in delay-100">
@@ -25,13 +25,13 @@
             v-for="(item, idx) in countdown"
             :key="item.label"
             class="flex flex-col items-center flex-1"
-            :style="{ borderLeft: idx !== 0 ? '1px dashed #24784d' : 'none' }"
+            :style="{ borderLeft: idx !== 0 ? '1px dashed #467D61' : 'none' }"
           >
-            <span class="text-4xl md:text-5xl font-extrabold text-[#24784d]">{{ item.value }}</span>
+            <span class="text-4xl md:text-5xl font-extrabold text-[#467D61]">{{ item.value }}</span>
             <span class="text-lg md:text-xl font-bold text-[#b99166] mt-1">{{ $t(item.label) }}</span>
           </div>
         </div>
-        <p class="text-center  text-[#24784d] font-semibold text-sm mb-2">
+        <p class="text-center  text-[#467D61] font-semibold text-sm mb-2">
           {{ $t('app.registration_closes') }} {{ $t('app.event_date') }}
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in delay-200">
@@ -162,10 +162,14 @@
                 <span class="w-2 h-2 bg-accent-500 rounded-full"></span>
                 <span>{{ $t('app.feature3') }}</span>
               </li>
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-accent-500 rounded-full"></span>
+                <span>{{ $t('app.feature4') }}</span>
+              </li>
             </ul>
           </div>
           <div class="">
-            <h2 class="text-2xl font-semibold text-primary-500 mb-4">{{ $t('app.goals_title') }}</h2>        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 justify-center">
+            <h2 class="text-2xl font-semibold text-primary-500 mb-4">{{ $t('admin.goals_title') }}</h2>        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 justify-center">
           <!-- هدف 1 -->
           <div class="relative group cursor-pointer min-h-[110px] h-full"
                @mouseenter="activeTooltip = 0" @mouseleave="activeTooltip = null">
@@ -309,7 +313,7 @@
       </div>
     </section>
 
-  
+
     <section class="py-16 bg-secondary-50 border-b border-gray-100">
       <div class="container-custom">
         <h2 class="text-2xl md:text-3xl font-bold text-primary-500 text-center mb-8">
@@ -343,10 +347,10 @@
     <!-- Vertical Timeline Section -->
     <section class="py-16 bg-white">
       <div class="container-custom">
-        <h2 class="text-3xl font-bold text-[#24784d] text-center mb-12">مراحل المسابقة</h2>
+        <h2 class="text-3xl font-bold text-[#467D61] text-center mb-12">مراحل المسابقة</h2>
         <div class="relative flex flex-col items-center">
           <!-- الخط العمودي في المنتصف -->
-          <div class="absolute left-1/2 top-0 w-1 bg-gradient-to-b from-[#b99166] to-[#24784d] h-full -translate-x-1/2 z-0"></div>
+          <div class="absolute left-1/2 top-0 w-1 bg-gradient-to-b from-[#b99166] to-[#467D61] h-full -translate-x-1/2 z-0"></div>
           <div
             v-for="(step, idx) in steps"
             :key="idx"
@@ -359,11 +363,11 @@
               <div
                 class="bg-[#e8d9bb] rounded-xl shadow-lg p-6 text-right max-w-md transition-all duration-700"
                 :class="[
-                  idx % 2 === 0 ? 'mr-auto border-l-8 border-[#b99166]' : 'ml-auto border-r-8 border-[#24784d]',
+                  idx % 2 === 0 ? 'mr-auto border-l-8 border-[#b99166]' : 'ml-auto border-r-8 border-[#467D61]',
                   stepsInView[idx] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 ]"
               >
-                <div class="text-lg font-bold text-[#24784d] mb-2">{{ step.title }}</div>
+                <div class="text-lg font-bold text-[#467D61] mb-2">{{ step.title }}</div>
                 <div v-if="step.subtitle" class="text-sm font-semibold text-[#b99166] mb-2">{{ step.subtitle }}</div>
                 <div v-if="step.description" class="text-gray-700 text-sm leading-relaxed">{{ step.description }}</div>
               </div>
@@ -372,8 +376,8 @@
             <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 transition-all duration-700"
               :class="stepsInView[idx] ? 'opacity-100 scale-100' : 'opacity-0 scale-75'"
             >
-              <div class="w-12 h-12 rounded-full bg-white border-4 border-[#24784d] flex items-center justify-center shadow-lg ring-4 ring-[#aaccbd] animate-pulse">
-                <span class="text-2xl font-bold text-[#24784d]">{{ idx + 1 }}</span>
+              <div class="w-12 h-12 rounded-full bg-white border-4 border-[#467D61] flex items-center justify-center shadow-lg ring-4 ring-[#aaccbd] animate-pulse">
+                <span class="text-2xl font-bold text-[#467D61]">{{ idx + 1 }}</span>
               </div>
             </div>
           </div>
@@ -805,4 +809,4 @@ function scrollToAbout() {
 .hero-bg-animate {
   animation: float-bg 8s ease-in-out infinite;
 }
-</style> 
+</style>
