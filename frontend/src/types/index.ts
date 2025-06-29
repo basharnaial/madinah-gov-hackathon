@@ -169,15 +169,15 @@ export interface FAQ {
 
 // Field Options
 export const FIELD_OF_INTEREST_OPTIONS = [
-  { value: 'AI', label: 'Artificial Intelligence', label_ar: 'الذكاء الاصطناعي' },
-  { value: 'Web Development', label: 'Web Development', label_ar: 'تطوير الويب' },
-  { value: 'IoT', label: 'Internet of Things', label_ar: 'إنترنت الأشياء' },
-  { value: 'Mobile Development', label: 'Mobile Development', label_ar: 'تطوير التطبيقات' },
-  { value: 'Data Science', label: 'Data Science', label_ar: 'علم البيانات' },
-  { value: 'Cybersecurity', label: 'Cybersecurity', label_ar: 'الأمن السيبراني' },
-  { value: 'Blockchain', label: 'Blockchain', label_ar: 'بلوك تشين' },
+  { value: 'SmartMonitoring', label: 'Smart Monitoring of Services and Facilities', label_ar: 'المتابعة الذكية للخدمات والمرافق' },
+  { value: 'InteractiveTourism', label: 'Interactive Religious Tourism', label_ar: 'السياحة الدينية التفاعلية' },
+  { value: 'SmartMobility', label: 'Smart Mobility and Sustainable Transport', label_ar: 'النقل الذكي والتنقل المستدام' },
+  { value: 'DigitalHealthcare', label: 'Digital Healthcare', label_ar: 'الرعاية الصحية الرقمية' },
+  { value: 'EnvironmentalTech', label: 'Environmental Technology', label_ar: 'التقنية البيئية' },
+  { value: 'SmartInfrastructure', label: 'Smart Infrastructure', label_ar: 'البنى التحتية الذكية' },
   { value: 'Other', label: 'Other', label_ar: 'أخرى' },
 ];
+
 
 export const REGISTRATION_TYPE_OPTIONS = [
   { value: 'Individual', label: 'Individual', label_ar: 'فردي' },

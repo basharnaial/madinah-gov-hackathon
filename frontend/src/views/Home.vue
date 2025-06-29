@@ -9,7 +9,7 @@
         class="absolute inset-0 w-full h-full object-cover opacity-70 z-0 pointer-events-none select-none hero-bg-animate"
         style="object-fit: cover;"
       />
-      <div class="container-custom text-center relative z-10">
+      <div class="container-custom text-center relative z-10 mt-10 mb-10">
         <h1 class="text-4xl md:text-6xl font-extrabold text-muted-600 text-primary-600 mb-6 drop-shadow-sm animate-scale-in">
           {{ $t('app.hero_title') }}
         </h1>
@@ -49,28 +49,14 @@
       </div>
     </section>
 
-    <!-- Emirate logo and welcome message -->
-    <div class="flex flex-col items-center mb-2 pt-6 animate-fade-in">
 
-      <div class="gap-4 mb-2">
-        <img src="/imarat-logo.png" alt="شعار إمارة المدينة" class="w-32 mb-2 logo-float animate-scale-in delay-800" />
-      </div>
-      
-
-      <span class="text-accent-500 font-bold text-lg">{{ $t('app.event_sponsor') }}</span>
-      <span class="text-primary-500 font-semibold">{{ $t('app.event_location') }}</span>
-      <br>
-      <span class="text-accent-500 font-semibold mb-4">{{ languageStore.currentLanguage === 'ar' ? 'بالتعاون مع' : 'In partnership with' }}</span>
-
-      <img src="/UPM-logo.png" alt="شعار إمارة المدينة" class="w-32 mb-2 logo-float animate-scale-in delay-700" />
-
-    </div>
 
     <!-- About Section -->
     <section id="about" class="py-16 bg-gradient-to-br from-secondary-100 to-white border-b border-gray-100">
       <div class="max-w-3xl mx-auto bg-white/80 rounded-3xl shadow-lg px-8 py-12 text-center animate-fade-in delay-300">
         <h2 class="text-4xl font-extrabold text-primary-600 mb-4 drop-shadow-sm">{{ $t('app.about_title') }}</h2>
-        <h3 class="text-2xl font-semibold text-primary-500 mb-6">{{ $t('app.about_subtitle') }}</h3>
+        <h3 class="text-2xl font-semibold text-primary-500 mb-6">          {{ $t('app.hero_title') }}
+        </h3>
         <p class="text-gray-700 mb-8 leading-relaxed text-lg">
           {{ $t('app.about_description') }}
         </p>
@@ -396,116 +382,7 @@ onUnmounted(() => {
   clearInterval(interval);
 });
 
-const categories = [
-  {
-    id: 1,
-    title: 'الذكاء الاصطناعي',
-    description: 'تطوير حلول ذكية باستخدام تقنيات الذكاء الاصطناعي',
-    icon: 'CpuChipIcon'
-  },
-  {
-    id: 2,
-    title: 'تطوير الويب',
-    description: 'بناء تطبيقات ويب حديثة ومتجاوبة',
-    icon: 'GlobeAltIcon'
-  },
-  {
-    id: 3,
-    title: 'إنترنت الأشياء',
-    description: 'ربط الأجهزة الذكية وإنشاء شبكات ذكية',
-    icon: 'WifiIcon'
-  },
-  {
-    id: 4,
-    title: 'تطوير التطبيقات',
-    description: 'تصميم وتطوير تطبيقات الهاتف المحمول',
-    icon: 'DevicePhoneMobileIcon'
-  }
-];
 
-const goals = [
-  {
-    title: 'تعزيز التوجهات الاستراتيجية للتحول الرقمي',
-    description: 'دعم الابتكار في الخدمات الرقمية وتحقيق بيئة رقمية متكاملة.',
-    icon: 'CogIcon'
-  },
-  {
-    title: 'تحقيق متطلبات التحول الرقمي',
-    description: 'تطبيق تقنيات ناشئة وفق معايير وطنية.',
-    icon: 'CheckCircleIcon'
-  },
-  {
-    title: 'نشر ثقافة التحول الرقمي',
-    description: 'تعزيز الابتكار والتواصل مع المستفيدين.',
-    icon: 'LightBulbIcon'
-  },
-  {
-    title: 'الريادة في التحول الرقمي',
-    description: 'توسيع آفاق الخبراء وتطبيق الأفكار الريادية.',
-    icon: 'TrophyIcon'
-  },
-  {
-    title: 'تفعيل شراكات التحول الرقمي',
-    description: 'مشاركة الجهات المحلية بما يخدم أهداف الإمارة.',
-    icon: 'UserGroupIcon'
-  },
-  {
-    title: 'تفعيل شراكة القطاع الخاص',
-    description: 'تمكين المبتكرين وتحسين الأثر المجتمعي.',
-    icon: 'BuildingOfficeIcon'
-  },
-  {
-    title: 'تمكين الكفاءات الشابة',
-    description: 'تعزيز ثقافة الابتكار والتواصل مع المستفيدين.',
-    icon: 'UserGroupIcon'
-  },
-  {
-    title: 'التفاعل مع المستفيدين',
-    description: 'زيادة التواجد الرقمي وربطهم برواد الأعمال.',
-    icon: 'ChatBubbleLeftRightIcon'
-  }
-];
-
-const officialTimeline = [
-  {
-    title: 'الإعلان',
-    date: '29 يونيو 2025',
-  },
-  {
-    title: 'فتح التسجيل',
-    date: '6 يوليو 2025',
-    description: 'يُفتح التسجيل للمشاركين بحيث يتم تعبئة البيانات العامة، واختيار المسار، ورفع السيرة الذاتية، والاطلاع على الشروط العامة، والاطلاع على الشروط العامة للمشاركة.'
-  },
-  {
-    title: 'إغلاق التسجيل',
-    date: '12 يوليو 2025',
-  },
-  {
-    title: 'فرز المتقدمين',
-    date: '13 يوليو 2025',
-  },
-  {
-    title: 'تأكيد المشاركات',
-    date: '14 يوليو 2025',
-  },
-  {
-    title: 'اليوم التعريفي',
-    date: '20 يوليو 2025',
-    description: 'بعد تأكيد المشاركات، يبدأ على استقبال الفرق المشاركة وتعريفهم بالشروط العامة، كما يتم توزيع الفرق وتحديد مجالات التحدي، وتقديم شرح لأدوات التنفيذ والمنصة التقنية الخاصة بالبرمجان، مما يساعد المشاركين على بداية مسارهم الجديد.'
-  },
-  {
-    title: 'أيام البرمجان',
-    date: '10–12 أغسطس 2025',
-  },
-  {
-    title: 'التحكيم النهائي',
-    date: '12 أغسطس 2025',
-  },
-  {
-    title: 'الحفل الختامي',
-    date: '13 أغسطس 2025',
-  },
-];
 
 const steps = computed(() => [
   {
@@ -580,11 +457,6 @@ const faqs = computed(() => [
     answer: t('app.faq2_answer')
   },
   {
-    id: 3,
-    question: t('app.faq3_question'),
-    answer: t('app.faq3_answer')
-  },
-  {
     id: 4,
     question: t('app.faq4_question'),
     answer: t('app.faq4_answer')
@@ -593,10 +465,6 @@ const faqs = computed(() => [
 
 function toggleFaq(id: number) {
   openFaq.value = openFaq.value === id ? null : id;
-}
-
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function scrollToAbout() {
@@ -780,20 +648,7 @@ function scrollToAbout() {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Timeline step animations */
-.timeline-step {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-.timeline-step.in-view {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.timeline-step:not(.in-view) {
-  transform: translateY(30px);
-  opacity: 0;
-}
 
 /* FAQ accordion smooth animations */
 .faq-item {
@@ -843,7 +698,7 @@ html {
   transform: translateY(50px);
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
+  
 .section-reveal.revealed {
   opacity: 1;
   transform: translateY(0);

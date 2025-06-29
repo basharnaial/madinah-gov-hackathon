@@ -4,7 +4,7 @@ import type { Language } from '@/types';
 import i18n from '@/utils/i18n';
 
 export const useLanguageStore = defineStore('language', () => {
-  const currentLanguage = ref<Language>('en');
+  const currentLanguage = ref<Language>('ar');
 
   // Initialize language from localStorage
   const savedLanguage = localStorage.getItem('language') as Language;

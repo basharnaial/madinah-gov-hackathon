@@ -28,7 +28,7 @@
       </div>
       
       <!-- Mobile Menu Button -->
-      <button @click="mobileOpen = !mobileOpen" class="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20">
+      <button @click.stop="toggleMobileMenu" class="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20">
         <svg v-if="!mobileOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 text-white">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -88,11 +88,23 @@ import { useRoute } from 'vue-router';
 import { useLanguageStore } from '@/stores/language';
 
 const mobileOpen = ref(false);
+const isToggling = ref(false);
 const route = useRoute();
 const languageStore = useLanguageStore();
 const currentLanguage = computed(() => languageStore.currentLanguage);
 const isRTL = computed(() => languageStore.isRTL);
 const toggleLanguage = languageStore.toggleLanguage;
+
+function toggleMobileMenu() {
+  if (isToggling.value) return;
+  
+  isToggling.value = true;
+  mobileOpen.value = !mobileOpen.value;
+  
+  setTimeout(() => {
+    isToggling.value = false;
+  }, 300);
+}
 
 function navLinkClass(path: string) {
   return route.path === path
@@ -102,8 +114,18 @@ function navLinkClass(path: string) {
 
 // Close mobile menu when clicking outside
 function handleClickOutside(event: Event) {
+  // Don't handle clicks while toggling
+  if (isToggling.value) return;
+  
   const target = event.target as HTMLElement;
   const nav = document.querySelector('nav');
+  const mobileButton = nav?.querySelector('button[class*="md:hidden"]');
+  
+  // Don't close if clicking on the mobile menu button or its children
+  if (mobileButton && (mobileButton.contains(target) || target === mobileButton)) {
+    return;
+  }
+  
   if (nav && !nav.contains(target) && mobileOpen.value) {
     mobileOpen.value = false;
   }
@@ -116,8 +138,7 @@ function closeMobileMenu() {
 
 // Control body scroll when mobile menu is open
 watch(mobileOpen, (isOpen) => {
-  if (isOpen) {
-    document.body.classList.add('mobile-menu-open');
+  if (isOpen) {    document.body.classList.add('mobile-menu-open');
   } else {
     document.body.classList.remove('mobile-menu-open');
   }
