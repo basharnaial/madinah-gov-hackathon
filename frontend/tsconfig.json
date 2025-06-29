@@ -5,6 +5,12 @@
     "composite": true,
     "baseUrl": ".",
     "resolveJsonModule": true,
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "paths": {
       "@/*": ["./src/*"]
     }
