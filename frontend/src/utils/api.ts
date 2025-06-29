@@ -7,7 +7,8 @@ import type {
   AdminAuthResponse, 
   DashboardStats, 
   ParticipantFilters,
-  PaginatedResponse 
+  PaginatedResponse,
+  TimelineStep 
 } from '@/types';
 
 class ApiService {
@@ -138,6 +139,38 @@ class ApiService {
   // Dashboard endpoints
   async getDashboardStats(): Promise<ApiResponse<DashboardStats>> {
     const response: AxiosResponse<ApiResponse<DashboardStats>> = await this.api.get('/admin/dashboard/stats');
+    return response.data;
+  }
+
+  // Timeline Steps endpoints (public)
+  async getTimelineSteps(): Promise<ApiResponse<TimelineStep[]>> {
+    const response: AxiosResponse<ApiResponse<TimelineStep[]>> = await this.api.get('/timeline-steps');
+    return response.data;
+  }
+
+  // Admin Timeline Steps management endpoints
+  async getAdminTimelineSteps(): Promise<ApiResponse<TimelineStep[]>> {
+    const response: AxiosResponse<ApiResponse<TimelineStep[]>> = await this.api.get('/admin/timeline-steps');
+    return response.data;
+  }
+
+  async createTimelineStep(stepData: Partial<TimelineStep>): Promise<ApiResponse<TimelineStep>> {
+    const response: AxiosResponse<ApiResponse<TimelineStep>> = await this.api.post('/admin/timeline-steps', stepData);
+    return response.data;
+  }
+
+  async getTimelineStep(id: number): Promise<ApiResponse<TimelineStep>> {
+    const response: AxiosResponse<ApiResponse<TimelineStep>> = await this.api.get(`/admin/timeline-steps/${id}`);
+    return response.data;
+  }
+
+  async updateTimelineStep(id: number, stepData: Partial<TimelineStep>): Promise<ApiResponse<TimelineStep>> {
+    const response: AxiosResponse<ApiResponse<TimelineStep>> = await this.api.put(`/admin/timeline-steps/${id}`, stepData);
+    return response.data;
+  }
+
+  async deleteTimelineStep(id: number): Promise<ApiResponse> {
+    const response: AxiosResponse<ApiResponse> = await this.api.delete(`/admin/timeline-steps/${id}`);
     return response.data;
   }
 }

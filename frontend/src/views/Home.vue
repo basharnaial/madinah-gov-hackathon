@@ -262,7 +262,17 @@
     <section class="py-16 bg-white">
       <div class="container-custom">
         <h2 class="text-3xl font-bold text-primary-600 text-center mb-12">{{ $t('admin.timeline_title') }}</h2>
-        <div class="relative flex flex-col items-center">
+        
+        <!-- Loading State -->
+        <div v-if="stepsLoading" class="text-center py-8">
+          <div class="inline-flex items-center space-x-2">
+            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-primary-600"></div>
+            <span class="text-gray-600">{{ $t('admin.loading') }}</span>
+          </div>
+        </div>
+        
+        <!-- Timeline Content -->
+        <div v-else-if="steps.length > 0" class="relative flex flex-col items-center">
           <!-- Vertical line in the center -->
           <div class="absolute left-1/2 top-0 w-1 bg-gradient-to-b from-accent-500 to-primary-600 h-full -translate-x-1/2 z-0"></div>
           <div
@@ -284,6 +294,37 @@
                 <div class="text-lg font-bold text-primary-600 mb-2">{{ step.title }}</div>
                 <div v-if="step.subtitle" class="text-sm font-semibold text-accent-500 mb-2">{{ step.subtitle }}</div>
                 <div v-if="step.description" class="text-gray-700 text-sm leading-relaxed">{{ step.description }}</div>
+                              <div
+                v-if="step.formattedDate"
+                class="mt-3 transition duration-500 bg-gradient-to-br from-white to-gray-50 rounded-xl p-4 shadow-md border border-gray-200" 
+                :class="[
+                  idx % 2 === 0 
+                    ? 'border-accent-200 shadow-accent-100/50' 
+                    : 'border-primary-200 shadow-primary-100/50',
+                  stepsInView[idx] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                ]"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex-1">
+                    <div 
+                      class="font-bold text-xs mb-1"
+                      :class="idx % 2 === 0 ? 'text-accent-700' : 'text-primary-700'"
+                    >
+                     {{ step.formattedDate.gregorian }}
+                    </div>
+                    <div 
+                      v-if="step.formattedDate.hijri" 
+                      class="text-xs font-medium opacity-80 flex items-center gap-1"
+                      :class="idx % 2 === 0 ? 'text-accent-600' : 'text-primary-600'"
+                    >
+                       {{ step.formattedDate.hijri }} هـ
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                
+
               </div>
             </div>
             <!-- Circle in the middle of the line -->
@@ -294,6 +335,14 @@
                 <span class="text-2xl font-bold text-primary-600">{{ idx + 1 }}</span>
               </div>
             </div>
+          </div>
+        </div>
+        
+        <!-- Empty State -->
+        <div v-else class="text-center py-8">
+          <div class="text-gray-500">
+            <p class="text-lg mb-2">{{ languageStore.currentLanguage === 'ar' ? 'لا توجد خطوات متاحة حالياً' : 'No timeline steps available' }}</p>
+            <p class="text-sm">{{ languageStore.currentLanguage === 'ar' ? 'سيتم تحديث الجدول الزمني قريباً' : 'Timeline will be updated soon' }}</p>
           </div>
         </div>
       </div>
@@ -338,12 +387,17 @@ import { useI18n } from 'vue-i18n';
 import { useLanguageStore } from '@/stores/language';
 import { CogIcon, CheckCircleIcon, LightBulbIcon, TrophyIcon, UserGroupIcon, ChatBubbleLeftRightIcon, BuildingOfficeIcon } from '@heroicons/vue/24/solid';
 import type { ComponentPublicInstance } from 'vue';
+import type { TimelineStep } from '@/types';
+import { apiService } from '@/utils/api';
+import { formatDateWithHijri } from '@/utils/dateUtils';
 
 const { t } = useI18n();
 const languageStore = useLanguageStore();
 
 const openFaq = ref<number | null>(null);
 const activeTooltip = ref<number | null>(null);
+const timelineSteps = ref<TimelineStep[]>([]);
+const stepsLoading = ref(true);
 
 // Countdown Timer logic
 const targetDate = new Date('2025-07-12T23:59:59');
@@ -374,9 +428,20 @@ function updateCountdown() {
 }
 
 let interval: ReturnType<typeof setInterval>;
-onMounted(() => {
+onMounted(async () => {
   updateCountdown();
   interval = setInterval(updateCountdown, 1000);
+  
+  // Fetch timeline steps
+  await fetchTimelineSteps();
+  
+  // Initialize stepsInView array based on fetched steps
+  stepsInView.value = Array(timelineSteps.value.length).fill(false);
+  
+  // Setup intersection observer after data is loaded
+  nextTick(() => {
+    setupIntersectionObserver();
+  });
 });
 onUnmounted(() => {
   clearInterval(interval);
@@ -384,62 +449,65 @@ onUnmounted(() => {
 
 
 
-const steps = computed(() => [
-  {
-    title: t('admin.timeline_step1_title'),
-    subtitle: t('admin.timeline_step1_subtitle'),
-    description: '',
-  },
-  {
-    title: t('admin.timeline_step2_title'),
-    subtitle: t('admin.timeline_step2_subtitle'),
-    description: '',
-  },
-  {
-    title: t('admin.timeline_step3_title'),
-    subtitle: t('admin.timeline_step3_subtitle'),
-    description: '',
-  },
-  {
-    title: t('admin.timeline_step4_title'),
-    subtitle: t('admin.timeline_step4_subtitle'),
-    description: '',
-  },
-  {
-    title: t('admin.timeline_step5_title'),
-    subtitle: t('admin.timeline_step5_subtitle'),
-    description: '',
-  },
-]);
+const steps = computed(() => {
+  const currentLanguage = languageStore.currentLanguage;
+  return timelineSteps.value.map(step => {
+    const formattedDate = step.step_date ? formatDateWithHijri(step.step_date, currentLanguage) : null;
+    
+    return {
+      title: currentLanguage === 'ar' ? step.title_ar : step.title_en,
+      subtitle: currentLanguage === 'ar' ? step.subtitle_ar : step.subtitle_en,
+      description: currentLanguage === 'ar' ? step.description_ar : step.description_en,
+      date: step.step_date,
+      formattedDate,
+      id: step.id
+    };
+  });
+});
+
+// Fetch timeline steps from API
+async function fetchTimelineSteps() {
+  try {
+    stepsLoading.value = true;
+    const response = await apiService.getTimelineSteps();
+    if (response.success && response.data) {
+      timelineSteps.value = response.data;
+    }
+  } catch (error) {
+    console.error('Failed to fetch timeline steps:', error);
+    // Fallback to empty array - the UI will handle the empty state
+    timelineSteps.value = [];
+  } finally {
+    stepsLoading.value = false;
+  }
+}
 
 // Reveal on scroll logic
-const stepsInView = ref<boolean[]>(Array(5).fill(false));
+const stepsInView = ref<boolean[]>([]);
 const stepRefs = ref<HTMLElement[]>([]);
 function setStepRef(el: Element | ComponentPublicInstance | null, idx: number) {
   if (el instanceof HTMLElement) stepRefs.value[idx] = el;
 }
 let observer: IntersectionObserver | null = null;
 
-onMounted(() => {
-  nextTick(() => {
-    observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const idx = Number((entry.target as HTMLElement).dataset.idx);
-          if (entry.isIntersecting) {
-            stepsInView.value[idx] = true;
-          } else {
-            stepsInView.value[idx] = false;
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-    stepRefs.value.forEach((el) => {
-      if (el) observer!.observe(el);
-    });
+function setupIntersectionObserver() {
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const idx = Number((entry.target as HTMLElement).dataset.idx);
+        if (entry.isIntersecting) {
+          stepsInView.value[idx] = true;
+        } else {
+          stepsInView.value[idx] = false;
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+  stepRefs.value.forEach((el) => {
+    if (el) observer!.observe(el);
   });
-});
+}
 
 onUnmounted(() => {
   if (observer) observer.disconnect();

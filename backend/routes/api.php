@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ParticipantController;
+use App\Http\Controllers\Api\TimelineStepController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,5 +51,17 @@ Route::prefix('admin')->group(function () {
         
         // Dashboard statistics
         Route::get('/dashboard/stats', [ParticipantController::class, 'getStats']);
+        
+        // Timeline Steps management
+        Route::prefix('timeline-steps')->group(function () {
+            Route::get('/', [TimelineStepController::class, 'index']);
+            Route::post('/', [TimelineStepController::class, 'store']);
+            Route::get('/{id}', [TimelineStepController::class, 'show']);
+            Route::put('/{id}', [TimelineStepController::class, 'update']);
+            Route::delete('/{id}', [TimelineStepController::class, 'destroy']);
+        });
     });
 });
+
+// Public routes
+Route::get('/timeline-steps', [TimelineStepController::class, 'index']);

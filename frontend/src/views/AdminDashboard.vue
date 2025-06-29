@@ -4,7 +4,25 @@
     <header class="bg-white shadow-sm border-b border-gray-200">
       <div class="container-custom py-4">
         <div class="flex justify-between items-center">
-          <h1 class="text-2xl font-bold text-primary-500">لوحة تحكم المدير</h1>
+          <div class="flex items-center gap-6">
+            <h1 class="text-2xl font-bold text-primary-500">لوحة تحكم المدير</h1>
+            <nav class="flex items-center gap-4">
+              <router-link 
+                to="/admin/dashboard" 
+                class="text-sm font-medium transition-colors hover:text-primary-600"
+                :class="$route.name === 'AdminDashboard' ? 'text-primary-600' : 'text-gray-600'"
+              >
+                المشاركين
+              </router-link>
+              <router-link 
+                to="/admin/timeline" 
+                class="text-sm font-medium transition-colors hover:text-primary-600"
+                :class="$route.name === 'TimelineManagement' ? 'text-primary-600' : 'text-gray-600'"
+              >
+                إدارة الجدول الزمني
+              </router-link>
+            </nav>
+          </div>
           <div class="flex items-center gap-4">
             <span class="text-gray-600">مرحباً، {{ adminStore.admin?.name }}</span>
             <button @click="handleLogout" class="btn btn-outline text-sm">

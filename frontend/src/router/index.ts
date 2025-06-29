@@ -29,6 +29,12 @@ const routes: RouteRecordRaw[] = [
     meta: { requiresAuth: true },
   },
   {
+    path: '/admin/timeline',
+    name: 'TimelineManagement',
+    component: () => import('@/views/admin/TimelineManagement.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
     path: '/:catchAll(.*)',
     redirect: '/',
   },

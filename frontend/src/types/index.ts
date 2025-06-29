@@ -189,4 +189,20 @@ export const STATUS_OPTIONS = [
   { value: 'Pending', label: 'Pending', label_ar: 'قيد المراجعة' },
   { value: 'Approved', label: 'Approved', label_ar: 'مقبول' },
   { value: 'Rejected', label: 'Rejected', label_ar: 'مرفوض' },
-]; 
+];
+
+// Timeline Step Types
+export interface TimelineStep {
+  id: number;
+  title_ar: string;
+  title_en: string;
+  subtitle_ar?: string;
+  subtitle_en?: string;
+  description_ar?: string;
+  description_en?: string;
+  step_date?: string;
+  order: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+} 

@@ -35,7 +35,7 @@ class Participant extends Model
         'phone' => 'required|string|max:20',
         'age' => 'required|integer|min:16|max:100',
         'city' => 'required|string|max:255',
-        'field_of_interest' => 'required|in:AI,Web Development,IoT,Mobile Development,Data Science,Cybersecurity,Blockchain,Other',
+        'field_of_interest' => 'required|in:SmartMonitoring,InteractiveTourism,SmartMobility,DigitalHealthcare,EnvironmentalTech,SmartInfrastructure,Other',
         'registration_type' => 'required|in:Individual,Team,Organization',
         'cv_path' => 'nullable|file|mimes:pdf|max:5120', // 5MB max
         'project_idea' => 'nullable|string|max:1000',
@@ -44,13 +44,12 @@ class Participant extends Model
 
     // Field of interest options
     public static $fieldOfInterestOptions = [
-        'AI' => 'Artificial Intelligence',
-        'Web Development' => 'Web Development',
-        'IoT' => 'Internet of Things',
-        'Mobile Development' => 'Mobile Development',
-        'Data Science' => 'Data Science',
-        'Cybersecurity' => 'Cybersecurity',
-        'Blockchain' => 'Blockchain',
+        'SmartMonitoring' => 'Smart Monitoring of Services and Facilities',
+        'InteractiveTourism' => 'Interactive Religious Tourism',
+        'SmartMobility' => 'Smart Mobility and Sustainable Transport',
+        'DigitalHealthcare' => 'Digital Healthcare',
+        'EnvironmentalTech' => 'Environmental Technology',
+        'SmartInfrastructure' => 'Smart Infrastructure',
         'Other' => 'Other',
     ];
 
