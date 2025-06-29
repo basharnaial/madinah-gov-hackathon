@@ -569,7 +569,7 @@ async function onSubmit() {
 
 /* Labels */
 .form-label {
-  @apply block text-sm font-semibold text-accent-500 mb-2;
+  @apply block text-sm font-semibold text-gray-700 mb-2;
 }
 
 .required-asterisk {
