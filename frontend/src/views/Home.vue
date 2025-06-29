@@ -24,7 +24,7 @@
             v-for="(item, idx) in countdown"
             :key="item.label"
             class="flex flex-col items-center flex-1"
-            :class="idx !== 0 ? 'border-l border-dashed border-primary-600' : ''"
+            :class="idx !== -1 ? 'border-l border-dashed border-primary-600' : ''"
           >
             <span class="countdown-number text-4xl md:text-5xl font-extrabold text-primary-600 animate-number-count">{{ item.value }}</span>
             <span class="text-lg md:text-xl font-bold text-accent-500 mt-1 animate-slide-down">{{ $t(item.label) }}</span>
@@ -519,11 +519,11 @@ const faqs = computed(() => [
     question: t('app.faq1_question'),
     answer: t('app.faq1_answer')
   },
-  {
-    id: 2,
-    question: t('app.faq2_question'),
-    answer: t('app.faq2_answer')
-  },
+  // {
+  //   id: 2,
+  //   question: t('app.faq2_question'),
+  //   answer: t('app.faq2_answer')
+  // },
   {
     id: 4,
     question: t('app.faq4_question'),
