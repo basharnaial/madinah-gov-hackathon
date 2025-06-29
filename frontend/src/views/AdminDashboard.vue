@@ -5,7 +5,7 @@
       <div class="container-custom py-4">
         <div class="flex justify-between items-center">
           <div class="flex items-center gap-6">
-            <h1 class="text-2xl font-bold text-primary-500">لوحة تحكم المدير</h1>
+            <h1 class="text-2xl font-bold text-primary-500">لوحة تحكم الادارة</h1>
             <nav class="flex items-center gap-4">
               <router-link 
                 to="/admin/dashboard" 
@@ -119,10 +119,13 @@
             </select>
             <select v-model="filters.field" class="input">
               <option value="">جميع المجالات</option>
-              <option value="ai">الذكاء الاصطناعي</option>
-              <option value="web">تطوير الويب</option>
-              <option value="iot">إنترنت الأشياء</option>
-              <option value="mobile">تطوير التطبيقات</option>
+              <option value="SmartMonitoring">المتابعة الذكية للخدمات والمرافق</option>
+              <option value="InteractiveTourism">السياحة الدينية التفاعلية</option>
+              <option value="SmartMobility">النقل الذكي والتنقل المستدام</option>
+              <option value="DigitalHealthcare">الرعاية الصحية الرقمية</option>
+              <option value="EnvironmentalTech">التقنية البيئية</option>
+              <option value="SmartInfrastructure">البنى التحتية الذكية</option>
+              <option value="Other">أخرى</option>
             </select>
             <button @click="exportParticipants" class="btn btn-accent">
               <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -143,9 +146,7 @@
                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                   المشارك
                 </th>
-                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  البريد الإلكتروني
-                </th>
+
                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                   المدينة
                 </th>
@@ -177,12 +178,11 @@
                         {{ participant.full_name }} - {{ getRegistrationTypeName(participant.registration_type) }}
                       </div>
                       <div class="text-sm text-gray-500">{{ participant.phone }}</div>
+                      <div class="text-sm text-gray-500">{{ participant.email }}</div>
                     </div>
                   </div>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {{ participant.email }}
-                </td>
+
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {{ participant.city }}
                 </td>
@@ -497,16 +497,36 @@ async function loadStatistics() {
 
 async function exportParticipants() {
   try {
-    const response = await apiService.exportParticipants();
-    if (response.success) {
-      // Handle file download
-      const link = document.createElement('a');
-      link.href = response.data.download_url;
-      link.download = 'participants.xlsx';
-      link.click();
-      uiStore.showAlert('success', 'تم تصدير البيانات بنجاح');
-    }
+    // Prepare filters for export
+    const exportFilters = {
+      ...(filters.status && { status: filters.status }),
+      ...(filters.registration_type && { registration_type: filters.registration_type }),
+      ...(filters.field && { field_of_interest: filters.field }),
+      ...(filters.search && { search: filters.search })
+    };
+
+    const blob = await apiService.exportParticipantsToExcel(exportFilters);
+    
+    // Create download link
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    
+    // Generate filename with current date
+    const currentDate = new Date().toISOString().split('T')[0];
+    link.download = `participants-${currentDate}.xlsx`;
+    
+    // Trigger download
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Clean up
+    window.URL.revokeObjectURL(url);
+    
+    uiStore.showAlert('success', 'تم تصدير البيانات بنجاح');
   } catch (error: any) {
+    console.error('Export error:', error);
     uiStore.showAlert('error', 'فشل في تصدير البيانات');
   }
 }
@@ -535,10 +555,13 @@ function getStatusClass(status: string) {
 
 function getFieldName(field: string) {
   const fieldMap: Record<string, string> = {
-    ai: 'الذكاء الاصطناعي',
-    web: 'تطوير الويب',
-    iot: 'إنترنت الأشياء',
-    mobile: 'تطوير التطبيقات'
+    SmartMonitoring: 'المتابعة الذكية للخدمات والمرافق',
+    InteractiveTourism: 'السياحة الدينية التفاعلية',
+    SmartMobility: 'النقل الذكي والتنقل المستدام',
+    DigitalHealthcare: 'الرعاية الصحية الرقمية',
+    EnvironmentalTech: 'التقنية البيئية',
+    SmartInfrastructure: 'البنى التحتية الذكية',
+    Other: 'أخرى'
   };
   return fieldMap[field] || field;
 }

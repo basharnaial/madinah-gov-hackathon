@@ -34,6 +34,7 @@
                     class="form-input" 
                     :class="{'form-input-error': errors.full_name}" 
                     :placeholder="$t('form.full_name')" 
+                    @input="clearFieldError('full_name')" 
                     required 
                   />
                   <p v-if="errors.full_name" class="form-error">{{ errors.full_name[0] }}</p>
@@ -51,6 +52,7 @@
                     class="form-input" 
                     :class="{'form-input-error': errors.email}" 
                     :placeholder="$t('form.email')" 
+                    @input="clearFieldError('email')" 
                     required 
                   />
                   <p v-if="errors.email" class="form-error">{{ errors.email[0] }}</p>
@@ -68,6 +70,7 @@
                     class="form-input" 
                     :class="{'form-input-error': errors.phone}" 
                     :placeholder="$t('form.phone')" 
+                    @input="clearFieldError('phone')" 
                     required 
                   />
                   <p v-if="errors.phone" class="form-error">{{ errors.phone[0] }}</p>
@@ -87,6 +90,7 @@
                     class="form-input" 
                     :class="{'form-input-error': errors.age}" 
                     :placeholder="$t('form.age')" 
+                    @input="clearFieldError('age')" 
                     required 
                   />
                   <p v-if="errors.age" class="form-error">{{ errors.age[0] }}</p>
@@ -104,6 +108,7 @@
                     class="form-input" 
                     :class="{'form-input-error': errors.city}" 
                     :placeholder="$t('form.city')" 
+                    @input="clearFieldError('city')" 
                     required 
                   />
                   <p v-if="errors.city" class="form-error">{{ errors.city[0] }}</p>
@@ -131,6 +136,7 @@
                     id="field_of_interest" 
                     class="form-select" 
                     :class="{'form-input-error': errors.field_of_interest}" 
+                    @change="clearFieldError('field_of_interest')" 
                     required
                   >
                     <option value="" disabled>{{ $t('form.field_of_interest') }}</option>
@@ -151,6 +157,7 @@
                     id="registration_type" 
                     class="form-select" 
                     :class="{'form-input-error': errors.registration_type}" 
+                    @change="clearFieldError('registration_type')" 
                     required
                   >
                     <option value="" disabled>{{ $t('form.registration_type') }}</option>
@@ -311,6 +318,7 @@
                     id="project_idea" 
                     class="form-textarea" 
                     :placeholder="$t('form.project_idea')" 
+                    @input="clearFieldError('project_idea')" 
                     rows="4"
                   ></textarea>
                   <p v-if="errors.project_idea" class="form-error">{{ errors.project_idea[0] }}</p>
@@ -326,6 +334,7 @@
                   id="terms" 
                   type="checkbox" 
                   class="checkbox-input" 
+                  @change="clearFieldError('terms_accepted')" 
                   required 
                 />
                 <label for="terms" class="checkbox-label">
@@ -428,6 +437,7 @@ function onFileChange(e: Event) {
   } else {
     form.cv = null;
   }
+  clearFieldError('cv');
 }
 
 function formatFileSize(bytes: number): string {
@@ -438,31 +448,64 @@ function formatFileSize(bytes: number): string {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 
+function clearFieldError(fieldName: string) {
+  if (errors[fieldName]) {
+    errors[fieldName] = [];
+  }
+}
+
 async function onSubmit() {
-  errors.full_name = [];
-  errors.email = [];
-  errors.phone = [];
-  errors.age = [];
-  errors.city = [];
-  errors.field_of_interest = [];
-  errors.registration_type = [];
-  errors.cv = [];
-  errors.project_idea = [];
-  errors.terms_accepted = [];
+  // Clear all errors first
+  Object.keys(errors).forEach(key => {
+    errors[key] = [];
+  });
 
-  // Frontend validation
-  if (!form.full_name) errors.full_name.push(t('form.required'));
-  if (!form.email) errors.email.push(t('form.required'));
-  if (!form.phone) errors.phone.push(t('form.required'));
-  if (!form.age || form.age < 16 || form.age > 100) errors.age.push(t('form.required'));
-  if (!form.city) errors.city.push(t('form.required'));
-  if (!form.field_of_interest) errors.field_of_interest.push(t('form.required'));
-  if (!form.registration_type) errors.registration_type.push(t('form.required'));
-  if (!form.cv) errors.cv.push(t('form.required'));
-  if (!form.terms_accepted) errors.terms_accepted.push(t('form.required'));
+  // Frontend validation - only mark fields with actual errors
+  const validationErrors: Record<string, string[]> = {};
 
-  if (Object.values(errors).some(arr => arr.length > 0)) {
-    uiStore.showAlert('error', t('form.error'));
+  if (!form.full_name.trim()) {
+    validationErrors.full_name = [t('form.required')];
+  }
+  
+  if (!form.email.trim()) {
+    validationErrors.email = [t('form.required')];
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    validationErrors.email = ['البريد الإلكتروني غير صحيح'];
+  }
+  
+  if (!form.phone.trim()) {
+    validationErrors.phone = [t('form.required')];
+  }
+  
+  if (!form.age || form.age < 16 || form.age > 100) {
+    validationErrors.age = ['العمر يجب أن يكون بين 16 و 100 سنة'];
+  }
+  
+  if (!form.city.trim()) {
+    validationErrors.city = [t('form.required')];
+  }
+  
+  if (!form.field_of_interest) {
+    validationErrors.field_of_interest = [t('form.required')];
+  }
+  
+  if (!form.registration_type) {
+    validationErrors.registration_type = [t('form.required')];
+  }
+  
+  if (!form.cv) {
+    validationErrors.cv = [t('form.required')];
+  }
+  
+  if (!form.terms_accepted) {
+    validationErrors.terms_accepted = ['يجب الموافقة على الشروط والأحكام'];
+  }
+
+  // Only assign errors for fields that actually have errors
+  Object.assign(errors, validationErrors);
+
+  if (Object.keys(validationErrors).length > 0) {
+    uiStore.showAlert('error', 'يرجى تصحيح الأخطاء المعروضة');
     return;
   }
 
@@ -494,10 +537,15 @@ async function onSubmit() {
       if (response.error) errors.general = [response.error];
     }
   } catch (error: any) {
+    // Clear existing errors first, then set server errors
+    Object.keys(errors).forEach(key => {
+      errors[key] = [];
+    });
+    
     if (error.response?.data?.errors) {
       Object.assign(errors, error.response.data.errors);
     }
-    uiStore.showAlert('error', error.response?.data?.message || t('form.error'));
+    uiStore.showAlert('error', error.response?.data?.message || 'حدث خطأ أثناء التسجيل');
   } finally {
     loading.value = false;
   }

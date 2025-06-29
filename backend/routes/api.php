@@ -42,11 +42,11 @@ Route::prefix('admin')->group(function () {
         // Participant management
         Route::prefix('participants')->group(function () {
             Route::get('/', [ParticipantController::class, 'index']);
+            Route::get('/export/excel', [ParticipantController::class, 'exportToExcel']);
             Route::get('/{participant}', [ParticipantController::class, 'show']);
             Route::post('/{participant}/approve', [ParticipantController::class, 'approve']);
             Route::post('/{participant}/reject', [ParticipantController::class, 'reject']);
             Route::get('/{participant}/cv', [ParticipantController::class, 'downloadCv']);
-            Route::get('/export/excel', [ParticipantController::class, 'exportToExcel']);
         });
         
         // Dashboard statistics

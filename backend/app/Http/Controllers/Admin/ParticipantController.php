@@ -152,7 +152,7 @@ class ParticipantController extends Controller
      */
     public function exportToExcel(Request $request)
     {
-        $query = Participant::query();
+        $query = Participant::with(['teamMembers', 'evaluation']);
 
         // Apply same filters as index method
         if ($request->filled('registration_type')) {
@@ -167,9 +167,31 @@ class ParticipantController extends Controller
             $query->where('field_of_interest', $request->field_of_interest);
         }
 
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('full_name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhere('city', 'like', "%{$search}%");
+            });
+        }
+
+        // Order by creation date (newest first)
+        $query->orderBy('created_at', 'desc');
+
         $participants = $query->get();
 
-        return Excel::download(new ParticipantsExport($participants), 'participants.xlsx');
+        // Generate filename with current date and filters info
+        $filename = 'participants-' . date('Y-m-d');
+        if ($request->filled('status')) {
+            $filename .= '-' . $request->status;
+        }
+        if ($request->filled('registration_type')) {
+            $filename .= '-' . $request->registration_type;
+        }
+        $filename .= '.xlsx';
+
+        return Excel::download(new ParticipantsExport($participants), $filename);
     }
 
     /**
