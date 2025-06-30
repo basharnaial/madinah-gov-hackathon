@@ -170,7 +170,7 @@ export interface FAQ {
 // Field Options
 export const FIELD_OF_INTEREST_OPTIONS = [
   { value: 'SmartMonitoring', label: 'Smart Monitoring of Services and Facilities', label_ar: 'المتابعة الذكية للخدمات والمرافق' },
-  { value: 'InteractiveTourism', label: 'Interactive Religious Tourism', label_ar: 'السياحة الدينية التفاعلية' },
+  { value: 'InteractiveTourism', label: 'Enriching the visitor experience.', label_ar: 'إثراء تجربة الزائر' },
   { value: 'SmartMobility', label: 'Smart Mobility and Sustainable Transport', label_ar: 'النقل الذكي والتنقل المستدام' },
   { value: 'DigitalHealthcare', label: 'Digital Healthcare', label_ar: 'الرعاية الصحية الرقمية' },
   { value: 'EnvironmentalTech', label: 'Environmental Technology', label_ar: 'التقنية البيئية' },

@@ -274,11 +274,7 @@
             </h2>
             <div class="w-8 h-1 bg-gradient-to-r from-accent-400 to-primary-400 rounded-full"></div>
           </div>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            {{ languageStore.currentLanguage === 'ar' 
-              ? 'اختر المسار الذي يناسب خبرتك وشغفك التقني لتكون جزءاً من مستقبل المدينة الذكية' 
-              : 'Choose the track that matches your expertise and passion to be part of the smart city future' }}
-          </p>
+
         </div>
 
         <!-- Tracks Grid -->
@@ -296,11 +292,7 @@
                 {{ languageStore.currentLanguage === 'ar' ? 'المتابعة الذكية للخدمات والمرافق' : 'Smart Monitoring of Services and Facilities' }}
               </h3>
               <div class="h-0.5 w-16 bg-gradient-to-r from-primary-400 to-primary-500 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
-              <p class="text-gray-600 text-sm leading-relaxed">
-                {{ languageStore.currentLanguage === 'ar' 
-                  ? 'طور حلول ذكية لمراقبة وإدارة الخدمات الحكومية والمرافق العامة بكفاءة عالية'
-                  : 'Develop smart solutions for monitoring and managing government services and public facilities efficiently' }}
-              </p>
+   
             </div>
           </div>
 
@@ -315,14 +307,10 @@
                 </svg>
               </div>
               <h3 class="text-lg font-bold text-gray-900 mb-3 group-hover:text-accent-600 transition-colors">
-                {{ languageStore.currentLanguage === 'ar' ? 'السياحة الدينية التفاعلية' : 'Interactive Religious Tourism' }}
+                {{ languageStore.currentLanguage === 'ar' ? 'إثراء تجربة الزائر' : 'Enriching the visitor experience.' }}
               </h3>
               <div class="h-0.5 w-16 bg-gradient-to-r from-accent-400 to-accent-500 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
-              <p class="text-gray-600 text-sm leading-relaxed">
-                {{ languageStore.currentLanguage === 'ar' 
-                  ? 'اصنع تجارب رقمية مبتكرة تثري رحلة الزوار الروحانية في المدينة المنورة'
-                  : 'Create innovative digital experiences that enrich visitors\' spiritual journey in Madinah' }}
-              </p>
+     
             </div>
           </div>
 
@@ -339,11 +327,7 @@
                 {{ languageStore.currentLanguage === 'ar' ? 'النقل الذكي والتنقل المستدام' : 'Smart Transportation & Sustainable Mobility' }}
               </h3>
               <div class="h-0.5 w-16 bg-gradient-to-r from-secondary-400 to-secondary-500 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
-              <p class="text-gray-600 text-sm leading-relaxed">
-                {{ languageStore.currentLanguage === 'ar' 
-                  ? 'ابتكر حلول نقل ذكية ومستدامة تحسن من تجربة التنقل في المدينة'
-                  : 'Innovate smart and sustainable transportation solutions that enhance the city mobility experience' }}
-              </p>
+ 
             </div>
           </div>
 
@@ -360,11 +344,7 @@
                 {{ languageStore.currentLanguage === 'ar' ? 'البنى التحتية الذكية' : 'Smart Infrastructure' }}
               </h3>
               <div class="h-0.5 w-16 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
-              <p class="text-gray-600 text-sm leading-relaxed">
-                {{ languageStore.currentLanguage === 'ar' 
-                  ? 'طور تقنيات متقدمة لإدارة وتحسين البنى التحتية الحضرية بذكاء'
-                  : 'Develop advanced technologies to intelligently manage and improve urban infrastructure' }}
-              </p>
+  
             </div>
           </div>
 
@@ -381,11 +361,7 @@
                 {{ languageStore.currentLanguage === 'ar' ? 'التقنية البيئية' : 'Environmental Technology' }}
               </h3>
               <div class="h-0.5 w-16 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
-              <p class="text-gray-600 text-sm leading-relaxed">
-                {{ languageStore.currentLanguage === 'ar' 
-                  ? 'ابتكر حلول تقنية صديقة للبيئة تساهم في استدامة المدينة ومستقبلها الأخضر'
-                  : 'Innovate eco-friendly technological solutions that contribute to the city\'s sustainability and green future' }}
-              </p>
+
             </div>
           </div>
 
@@ -402,11 +378,7 @@
                 {{ languageStore.currentLanguage === 'ar' ? 'الرعاية الصحية الرقمية' : 'Digital Healthcare' }}
               </h3>
               <div class="h-0.5 w-16 bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
-              <p class="text-gray-600 text-sm leading-relaxed">
-                {{ languageStore.currentLanguage === 'ar' 
-                  ? 'طور تطبيقات وحلول صحية رقمية تحسن من جودة الخدمات الطبية للمواطنين'
-                  : 'Develop digital health applications and solutions that improve the quality of medical services for citizens' }}
-              </p>
+ 
             </div>
           </div>
         </div>

@@ -106,7 +106,7 @@ class ParticipantsExport implements FromCollection, WithHeadings, WithMapping, S
     {
         $fieldMap = [
             'SmartMonitoring' => 'المتابعة الذكية للخدمات والمرافق',
-            'InteractiveTourism' => 'السياحة الدينية التفاعلية',
+            'InteractiveTourism' => 'إثراء تجربة الزائر',
             'SmartMobility' => 'النقل الذكي والتنقل المستدام',
             'DigitalHealthcare' => 'الرعاية الصحية الرقمية',
             'EnvironmentalTech' => 'التقنية البيئية',

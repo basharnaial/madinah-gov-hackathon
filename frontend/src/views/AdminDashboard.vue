@@ -120,7 +120,7 @@
             <select v-model="filters.field" class="input">
               <option value="">جميع المجالات</option>
               <option value="SmartMonitoring">المتابعة الذكية للخدمات والمرافق</option>
-              <option value="InteractiveTourism">السياحة الدينية التفاعلية</option>
+              <option value="InteractiveTourism">إثراء تجربة الزائر</option>
               <option value="SmartMobility">النقل الذكي والتنقل المستدام</option>
               <option value="DigitalHealthcare">الرعاية الصحية الرقمية</option>
               <option value="EnvironmentalTech">التقنية البيئية</option>
@@ -556,7 +556,7 @@ function getStatusClass(status: string) {
 function getFieldName(field: string) {
   const fieldMap: Record<string, string> = {
     SmartMonitoring: 'المتابعة الذكية للخدمات والمرافق',
-    InteractiveTourism: 'السياحة الدينية التفاعلية',
+    InteractiveTourism: 'إثراء تجربة الزائر',
     SmartMobility: 'النقل الذكي والتنقل المستدام',
     DigitalHealthcare: 'الرعاية الصحية الرقمية',
     EnvironmentalTech: 'التقنية البيئية',

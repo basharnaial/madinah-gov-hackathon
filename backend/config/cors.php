@@ -23,7 +23,9 @@ return [
         'http://localhost:3572',
         'http://localhost:3573',
         'http://127.0.0.1:3572',
-        'http://127.0.0.1:3573'
+        'http://127.0.0.1:3573',
+        'https://hackathon.almadinah.gov.sa',
+        'http://hackathon.almadinah.gov.sa'
     ],
 
     'allowed_origins_patterns' => [],
