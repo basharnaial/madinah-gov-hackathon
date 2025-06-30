@@ -175,7 +175,6 @@ export const FIELD_OF_INTEREST_OPTIONS = [
   { value: 'DigitalHealthcare', label: 'Digital Healthcare', label_ar: 'الرعاية الصحية الرقمية' },
   { value: 'EnvironmentalTech', label: 'Environmental Technology', label_ar: 'التقنية البيئية' },
   { value: 'SmartInfrastructure', label: 'Smart Infrastructure', label_ar: 'البنى التحتية الذكية' },
-  { value: 'Other', label: 'Other', label_ar: 'أخرى' },
 ];
 
 
@@ -205,4 +204,4 @@ export interface TimelineStep {
   is_active: boolean;
   created_at: string;
   updated_at: string;
-} 
+}

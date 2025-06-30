@@ -5,7 +5,7 @@
       <div class="container mx-auto px-4 py-4">
         <div class="flex justify-between items-center">
           <div class="flex items-center gap-6">
-            <h1 class="text-2xl font-bold text-primary-500">لوحة تحكم المدير</h1>
+            <h1 class="text-2xl font-bold text-primary-500">لوحة تحكم الادارة</h1>
             <nav class="flex items-center gap-4">
               <router-link 
                 to="/admin/dashboard" 

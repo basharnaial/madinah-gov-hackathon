@@ -729,7 +729,7 @@ async function onSubmit() {
 
 /* Submit Button */
 .submit-btn {
-  @apply w-full bg-gradient-to-r from-blue-600 to-amber-500 text-white font-bold py-4 px-8 rounded-xl hover:from-blue-700 hover:to-amber-600 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg shadow-lg;
+  @apply w-full bg-accent-500 text-white font-bold py-4 px-8 rounded-xl hover:from-blue-700 hover:to-amber-600 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg shadow-lg;
 }
 
 .submit-btn:hover:not(:disabled) {

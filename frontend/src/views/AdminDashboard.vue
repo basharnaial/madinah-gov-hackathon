@@ -560,8 +560,7 @@ function getFieldName(field: string) {
     SmartMobility: 'النقل الذكي والتنقل المستدام',
     DigitalHealthcare: 'الرعاية الصحية الرقمية',
     EnvironmentalTech: 'التقنية البيئية',
-    SmartInfrastructure: 'البنى التحتية الذكية',
-    Other: 'أخرى'
+    SmartInfrastructure: 'البنى التحتية الذكية'
   };
   return fieldMap[field] || field;
 }
