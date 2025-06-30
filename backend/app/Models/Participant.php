@@ -37,7 +37,7 @@ class Participant extends Model
         'city' => 'required|string|max:255',
         'field_of_interest' => 'required|in:SmartMonitoring,InteractiveTourism,SmartMobility,DigitalHealthcare,EnvironmentalTech,SmartInfrastructure,Other',
         'registration_type' => 'required|in:Individual,Team,Organization',
-        'cv_path' => 'nullable|file|mimes:pdf|max:5120', // 5MB max
+        'cv_path' => 'nullable|file|mimes:pdf,jpeg,jpg,png,gif,webp|max:24576', // 24MB max
         'project_idea' => 'nullable|string|max:1000',
         'terms_accepted' => 'required|accepted',
     ];

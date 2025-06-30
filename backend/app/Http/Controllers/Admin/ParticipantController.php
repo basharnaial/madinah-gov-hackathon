@@ -144,7 +144,16 @@ class ParticipantController extends Controller
             ], 404);
         }
 
-        return Storage::disk('public')->download($participant->cv_path);
+        // Get file info
+        $filePath = Storage::disk('public')->path($participant->cv_path);
+        $originalName = basename($participant->cv_path);
+        $extension = pathinfo($originalName, PATHINFO_EXTENSION);
+        
+        // Create a clean filename
+        $cleanName = preg_replace('/[^a-zA-Z0-9_\-\.]/', '', $participant->full_name);
+        $filename = "cv-{$cleanName}.{$extension}";
+
+        return Storage::disk('public')->download($participant->cv_path, $filename);
     }
 
     /**

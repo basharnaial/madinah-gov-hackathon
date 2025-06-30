@@ -29,7 +29,7 @@ class RegisterParticipantRequest extends FormRequest
             'city' => 'required|string|max:255',
             'field_of_interest' => 'required|in:SmartMonitoring,InteractiveTourism,SmartMobility,DigitalHealthcare,EnvironmentalTech,SmartInfrastructure,Other',
             'registration_type' => 'required|in:Individual,Team,Organization',
-            'cv' => 'required|file|mimes:pdf|max:5120', // 5MB max
+            'cv' => 'required|file|mimes:pdf,jpeg,jpg,png,gif,webp|max:24576', // 24MB max
             'project_idea' => 'nullable|string|max:1000',
             'terms_accepted' => 'required|accepted',
         ];
@@ -56,8 +56,8 @@ class RegisterParticipantRequest extends FormRequest
             'registration_type.in' => 'نوع التسجيل غير صحيح',
             'cv.required' => 'السيرة الذاتية مطلوبة',
             'cv.file' => 'يجب أن يكون الملف صحيحاً',
-            'cv.mimes' => 'يجب أن يكون الملف بصيغة PDF',
-            'cv.max' => 'حجم الملف يجب أن يكون أقل من 5 ميجابايت',
+            'cv.mimes' => 'يجب أن يكون الملف بصيغة PDF أو صورة (JPEG, PNG, GIF, WebP)',
+            'cv.max' => 'حجم الملف يجب أن يكون أقل من 24 ميجابايت',
             'project_idea.max' => 'وصف المشروع يجب أن يكون أقل من 1000 حرف',
             'terms_accepted.required' => 'يجب الموافقة على الشروط والأحكام',
             'terms_accepted.accepted' => 'يجب الموافقة على الشروط والأحكام',
