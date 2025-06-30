@@ -256,6 +256,165 @@
       </div>
     </section>
 
+    <!-- Hackathon Tracks Section -->
+    <section class="py-12 bg-gradient-to-br from-gray-50 via-white to-secondary-50 relative overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-3">
+        <div class="absolute top-16 left-8 w-48 h-48 bg-primary-200 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-16 right-8 w-64 h-64 bg-accent-200 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div class="container-custom relative z-10">
+        <!-- Section Header -->
+        <div class="text-center mb-12 animate-fade-in">
+          <div class="inline-flex items-center gap-3 mb-4">
+            <div class="w-8 h-1 bg-gradient-to-r from-primary-400 to-accent-400 rounded-full"></div>
+            <h2 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
+              {{ languageStore.currentLanguage === 'ar' ? 'مسارات المشاركة' : 'Hackathon Tracks' }}
+            </h2>
+            <div class="w-8 h-1 bg-gradient-to-r from-accent-400 to-primary-400 rounded-full"></div>
+          </div>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            {{ languageStore.currentLanguage === 'ar' 
+              ? 'اختر المسار الذي يناسب خبرتك وشغفك التقني لتكون جزءاً من مستقبل المدينة الذكية' 
+              : 'Choose the track that matches your expertise and passion to be part of the smart city future' }}
+          </p>
+        </div>
+
+        <!-- Tracks Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <!-- Track 1: Smart Monitoring -->
+          <div class="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden animate-fade-in delay-100 border border-gray-100 hover:border-primary-200">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-accent-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative p-6">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                {{ languageStore.currentLanguage === 'ar' ? 'المتابعة الذكية للخدمات والمرافق' : 'Smart Monitoring of Services and Facilities' }}
+              </h3>
+              <div class="h-0.5 w-16 bg-gradient-to-r from-primary-400 to-primary-500 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'طور حلول ذكية لمراقبة وإدارة الخدمات الحكومية والمرافق العامة بكفاءة عالية'
+                  : 'Develop smart solutions for monitoring and managing government services and public facilities efficiently' }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Track 2: Religious Tourism -->
+          <div class="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden animate-fade-in delay-200 border border-gray-100 hover:border-accent-200">
+            <div class="absolute inset-0 bg-gradient-to-br from-accent-500/5 to-secondary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative p-6">
+              <div class="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 mb-3 group-hover:text-accent-600 transition-colors">
+                {{ languageStore.currentLanguage === 'ar' ? 'السياحة الدينية التفاعلية' : 'Interactive Religious Tourism' }}
+              </h3>
+              <div class="h-0.5 w-16 bg-gradient-to-r from-accent-400 to-accent-500 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'اصنع تجارب رقمية مبتكرة تثري رحلة الزوار الروحانية في المدينة المنورة'
+                  : 'Create innovative digital experiences that enrich visitors\' spiritual journey in Madinah' }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Track 3: Smart Transportation -->
+          <div class="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden animate-fade-in delay-300 border border-gray-100 hover:border-secondary-200">
+            <div class="absolute inset-0 bg-gradient-to-br from-secondary-500/5 to-primary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative p-6">
+              <div class="w-12 h-12 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 mb-3 group-hover:text-secondary-600 transition-colors">
+                {{ languageStore.currentLanguage === 'ar' ? 'النقل الذكي والتنقل المستدام' : 'Smart Transportation & Sustainable Mobility' }}
+              </h3>
+              <div class="h-0.5 w-16 bg-gradient-to-r from-secondary-400 to-secondary-500 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'ابتكر حلول نقل ذكية ومستدامة تحسن من تجربة التنقل في المدينة'
+                  : 'Innovate smart and sustainable transportation solutions that enhance the city mobility experience' }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Track 4: Smart Infrastructure -->
+          <div class="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden animate-fade-in delay-400 border border-gray-100 hover:border-primary-200">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-600/5 to-accent-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative p-6">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 mb-3 group-hover:text-primary-700 transition-colors">
+                {{ languageStore.currentLanguage === 'ar' ? 'البنى التحتية الذكية' : 'Smart Infrastructure' }}
+              </h3>
+              <div class="h-0.5 w-16 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'طور تقنيات متقدمة لإدارة وتحسين البنى التحتية الحضرية بذكاء'
+                  : 'Develop advanced technologies to intelligently manage and improve urban infrastructure' }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Track 5: Environmental Technology -->
+          <div class="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden animate-fade-in delay-500 border border-gray-100 hover:border-accent-200">
+            <div class="absolute inset-0 bg-gradient-to-br from-accent-600/5 to-secondary-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative p-6">
+              <div class="w-12 h-12 bg-gradient-to-br from-accent-600 to-accent-700 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9m0 9a9 9 0 01-9-9m9 9c0 5-4 9-9 9s-9-4-9-9m9-9c0-5 4-9 9-9s9 4 9 9"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 mb-3 group-hover:text-accent-700 transition-colors">
+                {{ languageStore.currentLanguage === 'ar' ? 'التقنية البيئية' : 'Environmental Technology' }}
+              </h3>
+              <div class="h-0.5 w-16 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'ابتكر حلول تقنية صديقة للبيئة تساهم في استدامة المدينة ومستقبلها الأخضر'
+                  : 'Innovate eco-friendly technological solutions that contribute to the city\'s sustainability and green future' }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Track 6: Digital Healthcare -->
+          <div class="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden animate-fade-in delay-600 border border-gray-100 hover:border-secondary-200">
+            <div class="absolute inset-0 bg-gradient-to-br from-secondary-600/5 to-primary-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative p-6">
+              <div class="w-12 h-12 bg-gradient-to-br from-secondary-600 to-secondary-700 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 mb-3 group-hover:text-secondary-700 transition-colors">
+                {{ languageStore.currentLanguage === 'ar' ? 'الرعاية الصحية الرقمية' : 'Digital Healthcare' }}
+              </h3>
+              <div class="h-0.5 w-16 bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'طور تطبيقات وحلول صحية رقمية تحسن من جودة الخدمات الطبية للمواطنين'
+                  : 'Develop digital health applications and solutions that improve the quality of medical services for citizens' }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+    
+      </div>
+    </section>
+
     <!-- Official Timeline Section -->
 
     <!-- Vertical Timeline Section -->

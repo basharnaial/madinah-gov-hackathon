@@ -5,8 +5,8 @@
       <div class="flex-1 mb-6 md:mb-0">
         <div class="text-2xl font-extrabold text-white mb-2 tracking-wide">{{ $t('footer.title') }}</div>
         <div class="flex flex-col gap-1 text-sm">
-          <div><span class="font-semibold text-accent-500">{{ $t('footer.phone') }}:</span> <a :href="`tel:+966148155555`" class="hover:underline text-white hover:text-accent-500 transition">{{ $t('footer.phone_number') }}</a></div>
-          <div><span class="font-semibold text-accent-500">{{ $t('footer.email') }}:</span> <a :href="`mailto:${emailAddress}`" class="hover:underline text-white hover:text-accent-500 transition">{{ emailAddress }}</a></div>
+          <div><span class="font-semibold text-accent-500">{{ $t('footer.phone') }}:</span> <a :href="`http://api.whatsapp.com/send/?phone=966544403423&type=phone_number&app_absent=0&text=`" class="hover:underline text-white hover:text-accent-500 transition">0544403423</a></div>
+          <!--<div><span class="font-semibold text-accent-500">{{ $t('footer.email') }}:</span> <a :href="`mailto:${emailAddress}`" class="hover:underline text-white hover:text-accent-500 transition">{{ emailAddress }}</a></div>-->
         </div>
       </div>
       <!-- Quick Links -->
@@ -27,7 +27,6 @@ import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
-// الإيميل كمتغير ثابت لتجنب مشاكل Vue i18n مع رمز @
 const emailAddress = 'info@almadinah.gov.sa';
 </script>
 
