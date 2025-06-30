@@ -17,12 +17,14 @@ class TimelineStep extends Model
         'description_ar',
         'description_en',
         'step_date',
+        'due_date',
         'order',
         'is_active'
     ];
 
     protected $casts = [
         'step_date' => 'date',
+        'due_date' => 'date',
         'is_active' => 'boolean',
         'order' => 'integer'
     ];

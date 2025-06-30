@@ -296,9 +296,9 @@
               </div>
             </div>
             <div v-if="selectedParticipant.cv_path">
-              <label class="block text-sm font-medium text-gray-700">السيرة الذاتية</label>
+              <label class="block text-sm font-medium text-gray-700">المرفق (السيرة الذاتية)</label>
               <button @click="downloadCv(selectedParticipant.id)" class="text-accent-500 underline">
-                تحميل السيرة الذاتية
+                تحميل المرفق (السيرة الذاتية)
               </button>
             </div>
             <div v-if="selectedParticipant.evaluation">
@@ -598,16 +598,24 @@ function handleLogout() {
 async function downloadCv(id: number) {
   try {
     const blob = await apiService.downloadParticipantCv(id);
+    
+    // الحصول على معلومات الملف من المشارك المحدد
+    const participant = selectedParticipant.value;
+    const cvPath = participant?.cv_path || '';
+    const extension = cvPath.split('.').pop() || 'pdf';
+    const cleanName = participant?.full_name?.replace(/[^a-zA-Z0-9_\-\.]/g, '') || 'file';
+    const filename = `cv-${cleanName}.${extension}`;
+    
     const url = window.URL.createObjectURL(new Blob([blob]));
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', 'cv.pdf');
+    link.setAttribute('download', filename);
     document.body.appendChild(link);
     link.click();
     link.remove();
     window.URL.revokeObjectURL(url);
   } catch (error) {
-    uiStore.showAlert('error', 'فشل في تحميل السيرة الذاتية');
+    uiStore.showAlert('error', 'فشل في تحميل المرفق');
   }
 }
 

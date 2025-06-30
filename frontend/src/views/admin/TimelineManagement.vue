@@ -99,7 +99,9 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   <div v-if="step.step_date" class="flex flex-col">
                     <span class="font-medium">{{ formatDate(step.step_date) }}</span>
+                    <span v-if="step.due_date" class="font-medium text-accent-600">- {{ formatDate(step.due_date) }}</span>
                     <span class="text-xs text-gray-500">{{ formatHijriDate(step.step_date) }} هـ</span>
+                    <span v-if="step.due_date" class="text-xs text-accent-500">- {{ formatHijriDate(step.due_date) }} هـ</span>
                   </div>
                   <span v-else class="text-gray-400">{{ $t('admin.no_date') }}</span>
                 </td>
@@ -228,6 +230,17 @@
             >
           </div>
 
+          <!-- Due Date -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">{{ $t('admin.due_date') }}</label>
+            <input
+              v-model="form.due_date"
+              type="date"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+            >
+            <p class="text-xs text-gray-500 mt-1">{{ $t('admin.due_date_optional') }}</p>
+          </div>
+
           <!-- Active Status -->
           <div class="flex items-center">
             <input
@@ -317,6 +330,7 @@ const form = ref({
   description_ar: '',
   description_en: '',
   step_date: '',
+  due_date: '',
   is_active: true
 });
 
@@ -363,6 +377,7 @@ function editStep(step: TimelineStep) {
     description_ar: step.description_ar || '',
     description_en: step.description_en || '',
     step_date: step.step_date || '',
+    due_date: step.due_date || '',
     is_active: step.is_active
   };
   showModal.value = true;
@@ -384,6 +399,7 @@ function resetForm() {
     description_ar: '',
     description_en: '',
     step_date: '',
+    due_date: '',
     is_active: true
   };
 }
@@ -394,7 +410,8 @@ async function saveStep() {
     
     const stepData = {
       ...form.value,
-      step_date: form.value.step_date || null
+      step_date: form.value.step_date || null,
+      due_date: form.value.due_date || null
     };
     
     if (editingStep.value) {

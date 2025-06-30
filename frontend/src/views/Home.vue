@@ -312,13 +312,7 @@
                     >
                      {{ step.formattedDate.gregorian }}
                     </div>
-                    <div 
-                      v-if="step.formattedDate.hijri" 
-                      class="text-xs font-medium opacity-80 flex items-center gap-1"
-                      :class="idx % 2 === 0 ? 'text-accent-600' : 'text-primary-600'"
-                    >
-                       {{ step.formattedDate.hijri }} هـ
-                    </div>
+  
                   </div>
                 </div>
               </div>
@@ -389,7 +383,7 @@ import { CogIcon, CheckCircleIcon, LightBulbIcon, TrophyIcon, UserGroupIcon, Cha
 import type { ComponentPublicInstance } from 'vue';
 import type { TimelineStep } from '@/types';
 import { apiService } from '@/utils/api';
-import { formatDateWithHijri } from '@/utils/dateUtils';
+import { formatDateWithHijri, formatDateRange } from '@/utils/dateUtils';
 
 const { t } = useI18n();
 const languageStore = useLanguageStore();
@@ -452,13 +446,14 @@ onUnmounted(() => {
 const steps = computed(() => {
   const currentLanguage = languageStore.currentLanguage;
   return timelineSteps.value.map(step => {
-    const formattedDate = step.step_date ? formatDateWithHijri(step.step_date, currentLanguage) : null;
+    const formattedDate = step.step_date ? formatDateRange(step.step_date, step.due_date || null, currentLanguage) : null;
     
     return {
       title: currentLanguage === 'ar' ? step.title_ar : step.title_en,
       subtitle: currentLanguage === 'ar' ? step.subtitle_ar : step.subtitle_en,
       description: currentLanguage === 'ar' ? step.description_ar : step.description_en,
       date: step.step_date,
+      dueDate: step.due_date,
       formattedDate,
       id: step.id
     };

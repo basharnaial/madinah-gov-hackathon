@@ -285,7 +285,7 @@
                       @change="onFileChange" 
                       id="cv" 
                       type="file" 
-                      accept="application/pdf" 
+                      accept="application/pdf,image/*" 
                       class="file-input" 
                       :class="{'form-input-error': errors.cv}" 
                       required 
@@ -298,7 +298,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                       <div class="text-center">
-                        <span v-if="!form.cv" class="text-sm text-gray-600">{{ $t('form.choose_cv_file') }}</span>
+                        <span v-if="!form.cv" class="text-sm text-gray-600">اختر ملف السيرة الذاتية (PDF أو صورة - أقصى حجم 24 ميجا)</span>
                         <div v-else>
                           <span class="text-sm text-green-700 font-semibold">{{ form.cv.name }}</span>
                           <p class="text-xs text-gray-500 mt-1">{{ formatFileSize(form.cv.size) }}</p>
@@ -433,7 +433,27 @@ function setTeamSize(size: number) {
 function onFileChange(e: Event) {
   const target = e.target as HTMLInputElement;
   if (target.files && target.files.length > 0) {
-    form.cv = target.files[0];
+    const file = target.files[0];
+    
+    // التحقق من حجم الملف (24 ميجا = 24 * 1024 * 1024 بايت)
+    const maxSize = 24 * 1024 * 1024;
+    if (file.size > maxSize) {
+      uiStore.showAlert('error', 'حجم الملف كبير جداً. الحد الأقصى المسموح 24 ميجا');
+      target.value = '';
+      form.cv = null;
+      return;
+    }
+    
+    // التحقق من نوع الملف
+    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) {
+      uiStore.showAlert('error', 'نوع الملف غير مدعوم. يُسمح فقط بملفات PDF والصور');
+      target.value = '';
+      form.cv = null;
+      return;
+    }
+    
+    form.cv = file;
   } else {
     form.cv = null;
   }
@@ -495,6 +515,18 @@ async function onSubmit() {
   
   if (!form.cv) {
     validationErrors.cv = [t('form.required')];
+  } else {
+    // التحقق من حجم الملف
+    const maxSize = 24 * 1024 * 1024;
+    if (form.cv.size > maxSize) {
+      validationErrors.cv = ['حجم الملف كبير جداً. الحد الأقصى المسموح 24 ميجا'];
+    }
+    
+    // التحقق من نوع الملف
+    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+    if (!allowedTypes.includes(form.cv.type)) {
+      validationErrors.cv = ['نوع الملف غير مدعوم. يُسمح فقط بملفات PDF والصور'];
+    }
   }
   
   if (!form.terms_accepted) {

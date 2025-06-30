@@ -136,4 +136,25 @@ export function getDayNameEnglish(dateString: string): string {
   } catch {
     return '';
   }
+}
+
+/**
+ * Format date range with optional due date
+ */
+export function formatDateRange(stepDate: string, dueDate: string | null, language: 'ar' | 'en'): {
+  gregorian: string;
+  hijri: string;
+} {
+  const stepFormatted = formatDateWithHijri(stepDate, language);
+  
+  if (!dueDate) {
+    return stepFormatted;
+  }
+  
+  const dueFormatted = formatDateWithHijri(dueDate, language);
+  
+  return {
+    gregorian: `${stepFormatted.gregorian} - ${dueFormatted.gregorian}`,
+    hijri: stepFormatted.hijri ? `${stepFormatted.hijri} - ${dueFormatted.hijri}` : dueFormatted.hijri
+  };
 } 

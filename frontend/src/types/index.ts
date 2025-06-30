@@ -200,6 +200,7 @@ export interface TimelineStep {
   description_ar?: string;
   description_en?: string;
   step_date?: string;
+  due_date?: string;
   order: number;
   is_active: boolean;
   created_at: string;
