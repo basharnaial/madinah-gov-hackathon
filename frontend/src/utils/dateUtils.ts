@@ -27,15 +27,15 @@ function gregorianToHijri(gregorianDate: Date): { year: number; month: number; d
   // Hijri calendar started on July 16, 622 CE
   const hijriEpoch = new Date(622, 6, 16);
   const daysDiff = Math.floor((gregorianDate.getTime() - hijriEpoch.getTime()) / (1000 * 60 * 60 * 24));
-  
+
   // Average Hijri year is about 354.37 days
   const hijriYear = Math.floor(daysDiff / 354.37) + 1;
   const remainingDays = daysDiff % 354.37;
-  
+
   // Average Hijri month is about 29.53 days
   const hijriMonth = Math.floor(remainingDays / 29.53) + 1;
   const hijriDay = Math.floor(remainingDays % 29.53) + 1;
-  
+
   return {
     year: Math.max(1, hijriYear),
     month: Math.min(12, Math.max(1, hijriMonth)),
@@ -50,11 +50,11 @@ export function formatDateArabic(dateString: string): string {
   try {
     const date = new Date(dateString);
     if (isNaN(date.getTime())) return dateString;
-    
+
     const day = date.getDate();
     const month = arabicMonths[date.getMonth()];
     const year = date.getFullYear();
-    
+
     return `${day} ${month} ${year}`;
   } catch (error) {
     return dateString;
@@ -68,11 +68,11 @@ export function formatDateEnglish(dateString: string): string {
   try {
     const date = new Date(dateString);
     if (isNaN(date.getTime())) return dateString;
-    
+
     const day = date.getDate();
     const month = englishMonths[date.getMonth()];
     const year = date.getFullYear();
-    
+
     return `${month} ${day}, ${year}`;
   } catch (error) {
     return dateString;
@@ -86,10 +86,10 @@ export function formatHijriDate(dateString: string): string {
   try {
     const date = new Date(dateString);
     if (isNaN(date.getTime())) return '';
-    
+
     const hijri = gregorianToHijri(date);
     const monthName = hijriMonths[hijri.month - 1];
-    
+
     return `${hijri.day} ${monthName} ${hijri.year}`;
   } catch (error) {
     return '';
@@ -103,12 +103,12 @@ export function formatDateWithHijri(dateString: string, language: 'ar' | 'en'): 
   gregorian: string;
   hijri: string;
 } {
-  const gregorian = language === 'ar' 
+  const gregorian = language === 'ar'
     ? formatDateArabic(dateString)
     : formatDateEnglish(dateString);
-  
+
   const hijri = formatHijriDate(dateString);
-  
+
   return { gregorian, hijri };
 }
 
@@ -146,15 +146,15 @@ export function formatDateRange(stepDate: string, dueDate: string | null, langua
   hijri: string;
 } {
   const stepFormatted = formatDateWithHijri(stepDate, language);
-  
+
   if (!dueDate) {
     return stepFormatted;
   }
-  
+
   const dueFormatted = formatDateWithHijri(dueDate, language);
-  
+
   return {
     gregorian: `${stepFormatted.gregorian} - ${dueFormatted.gregorian}`,
     hijri: stepFormatted.hijri ? `${stepFormatted.hijri} - ${dueFormatted.hijri}` : dueFormatted.hijri
   };
-} 
+}
