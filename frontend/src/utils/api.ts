@@ -11,12 +11,14 @@ import type {
   TimelineStep 
 } from '@/types';
 
+const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
 class ApiService {
   private api: AxiosInstance;
 
   constructor() {
     this.api = axios.create({
-      baseURL: 'http://127.0.0.1:8000/api',
+      baseURL: isLocal ? 'http://127.0.0.1:8000/api' : 'https://hackathon.almadinah.gov.sa/backend/public/api',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',

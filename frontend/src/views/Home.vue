@@ -293,6 +293,16 @@
               </h3>
               <div class="h-0.5 w-16 bg-gradient-to-r from-primary-400 to-primary-500 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
    
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'تمكين متابعة الخدمات والمرافق الحكومية عبر أدوات ذكية لتعزيز كفاءة الأداء.'
+                  : 'Enabling the monitoring of government services and facilities through smart tools to enhance operational efficiency.' }}
+              </p>
+              <p class="text-gray-600 text-xs font-bold leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'يشمل ذلك النقل من المتابعة التقليدية إلى القيادة بالبيانات.'
+                  : 'This includes transitioning from traditional monitoring to data-driven governance.' }}
+              </p>
             </div>
           </div>
 
@@ -311,6 +321,16 @@
               </h3>
               <div class="h-0.5 w-16 bg-gradient-to-r from-accent-400 to-accent-500 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
      
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'تحسين تجربة الضيوف في المدينة المنورة، خصوصًا في إثراء الرحلات الدينية.'
+                  : 'Improving the experience of guests in Madinah, especially by enriching religious journeys.' }}
+              </p>
+              <p class="text-gray-600 text-xs font-bold leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'يهدف إلى تقديم تجربة عصرية متكاملة باستخدام أدوات تفاعلية وتقنيات ذكية.'
+                  : 'Aims to deliver a modern, integrated experience through interactive tools and smart technologies.' }}
+              </p>
             </div>
           </div>
 
@@ -328,6 +348,16 @@
               </h3>
               <div class="h-0.5 w-16 bg-gradient-to-r from-secondary-400 to-secondary-500 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
  
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'إعادة تعريف التنقل داخل المدينة عبر تقنيات تسهل الانسيابية وتقلل الازدحام.'
+                  : 'Redefining mobility within the city using technologies that ease traffic flow and reduce congestion.' }}
+              </p>
+              <p class="text-gray-600 text-xs font-bold leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'يسهم في تعزيز مفاهيم الاستدامة في النقل وتحسين جودة الحياة.'
+                  : 'Contributes to promoting sustainability concepts in transportation and improving quality of life.' }}
+              </p>
             </div>
           </div>
 
@@ -345,6 +375,16 @@
               </h3>
               <div class="h-0.5 w-16 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
   
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'إدارة منشآت البنية التحتية بطرق تعتمد على البيانات لرفع كفاءة التشغيل.'
+                  : 'Managing infrastructure facilities through data-driven methods to enhance operational efficiency.' }}
+              </p>
+              <p class="text-gray-600 text-xs font-bold leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'يسهم ذلك في تحسين جودة الحياة وتقليص الهدر التشغيلي.'
+                  : 'Contributes to improving quality of life and reducing operational waste.' }}
+              </p>
             </div>
           </div>
 
@@ -362,6 +402,16 @@
               </h3>
               <div class="h-0.5 w-16 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
 
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'توظيف تقنيات بيئية مستدامة مثل الطاقة والمياه لتعزيز جهود التنمية.'
+                  : 'Utilizing sustainable environmental technologies such as energy and water solutions to support development efforts.' }}
+              </p>
+              <p class="text-gray-600 text-xs font-bold leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'يهدف إلى تحقيق أهداف التنمية المستدامة بكفاءة.'
+                  : 'Aims to achieve sustainable development goals efficiently.' }}
+              </p>
             </div>
           </div>
 
@@ -379,6 +429,16 @@
               </h3>
               <div class="h-0.5 w-16 bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-full mb-3 group-hover:w-full transition-all duration-300"></div>
  
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'تعزيز جودة الرعاية الصحية عبر تقنيات رقمية تسهل الوصول وتقدم خدمات متقدمة.'
+                  : 'Enhancing the quality of healthcare through digital technologies that facilitate access and deliver advanced services.' }}
+              </p>
+              <p class="text-gray-600 text-xs font-bold leading-relaxed">
+                {{ languageStore.currentLanguage === 'ar' 
+                  ? 'يشمل ذلك تحسين تجربة المواطنين والمقيمين ورفع كفاءة الرعاية.'
+                  : 'This includes improving the experience of citizens and residents, and increasing care efficiency.' }}
+              </p>
             </div>
           </div>
         </div>
