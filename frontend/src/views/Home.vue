@@ -16,32 +16,31 @@
         <p class="text-xl md:text-2xl text-gray-700 mb-10 max-w-3xl mx-auto animate-fade-in delay-200">
           {{ $t('app.hero_subtitle') }}
         </p>
-        <!-- Countdown Timer -->
-        <div
-          class="countdown-container mx-auto mt-10 mb-6 max-w-3xl rounded-3xl shadow-lg flex flex-wrap justify-center items-center gap-0 bg-gradient-to-r from-accent-500 to-muted-300 p-6 animate-bounce-in delay-400"
-        >
-          <div
-            v-for="(item, idx) in countdown"
-            :key="item.label"
-            class="flex flex-col items-center flex-1"
-            :class="(idx === 1 || idx === 2 || idx === 0) ? 'border-l border-dashed border-primary-600' : ''"
-          >
-            <span class="countdown-number text-4xl md:text-5xl font-extrabold text-primary-600 animate-number-count">{{ item.value }}</span>
-            <span class="text-lg md:text-xl font-bold text-accent-500 mt-1 animate-slide-down">{{ $t(item.label) }}</span>
+        
+        <!-- Registration Ended Message -->
+        <div class="countdown-container mx-auto mt-10 mb-6 max-w-3xl rounded-3xl shadow-lg bg-gradient-to-r from-red-500 to-red-400 p-6 animate-bounce-in delay-400">
+          <div class="text-center">
+            <div class="flex items-center justify-center gap-3 mb-3">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <h3 class="text-2xl md:text-3xl font-extrabold text-white">{{ $t('app.registration_ended') }}</h3>
+            </div>
+            <p class="text-white text-lg md:text-xl opacity-90">{{ $t('app.registration_closed') }}</p>
           </div>
         </div>
-        <p class="text-center  text-primary-600 font-semibold text-sm mb-2">
+        <!-- <p class="text-center  text-primary-600 font-semibold text-sm mb-2">
           {{ $t('app.registration_closes') }} {{ $t('app.event_date') }}
-        </p>
+        </p> -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in delay-600">
 
 
-          <router-link
+          <!-- <router-link
            to="/register"
             class="btn btn-primary text-lg px-8 py-3 shadow-lg hover:scale-105 transition-transform"
           >
             {{ $t('app.register') }}
-          </router-link>
+          </router-link> -->
           <a @click="scrollToAbout" class="btn btn-outline text-lg px-8 py-3 hover:bg-gray-100 transition-colors cursor-pointer">
             {{ $t('app.learn_more') }}
           </a>
@@ -554,7 +553,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 bg-accent-500 text-white relative overflow-hidden">
+    <!-- <section class="py-16 bg-accent-500 text-white relative overflow-hidden">
       <div class="container-custom text-center relative z-10">
         <h2 class="text-3xl font-bold mb-4 animate-scale-in">{{ $t('app.cta_title') }}</h2>
         <p class="text-xl mb-8 opacity-90 animate-fade-in delay-200">{{ $t('app.cta_subtitle') }}</p>
@@ -562,7 +561,7 @@
           {{ $t('app.register') }}
         </router-link>
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
 

@@ -14,7 +14,7 @@
       <!-- Desktop Links -->
       <div class="hidden md:flex items-center gap-8 flex-1 justify-center">
         <router-link to="/" class="text-white/90 text-lg font-semibold hover:text-accent-1000 transition nav-link" :class="navLinkClass('/')">{{ $t('app.home') }}</router-link>
-        <router-link to="/register" class="text-white/90 text-lg font-semibold hover:text-accent-1000 transition nav-link" :class="navLinkClass('/register')">{{ $t('app.register') }}</router-link>
+        <!-- <router-link to="/register" class="text-white/90 text-lg font-semibold hover:text-accent-1000 transition nav-link" :class="navLinkClass('/register')">{{ $t('app.register') }}</router-link> -->
       </div>
       
       <!-- CTA buttons -->
@@ -22,9 +22,9 @@
         <button @click="toggleLanguage" class="bg-primary-600 text-white font-bold px-5 py-2 rounded-full hover:bg-primary-700 transition">
           {{ currentLanguage === 'en' ? 'AR' : 'EN' }}
         </button>
-        <router-link to="/register" class="bg-green-600 text-white font-bold px-6 py-2 rounded-full shadow-lg hover:bg-green-700 transition">
+        <!-- <router-link to="/register" class="bg-green-600 text-white font-bold px-6 py-2 rounded-full shadow-lg hover:bg-green-700 transition">
           {{ $t('app.register') }}
-        </router-link>
+        </router-link> -->
       </div>
       
       <!-- Mobile Menu Button -->
@@ -50,7 +50,7 @@
           >
             {{ $t('app.home') }}
           </router-link>
-          
+<!--           
           <router-link 
             to="/register" 
             class="block py-3 px-4 text-white text-lg font-semibold hover:bg-accent-700 rounded-lg transition-colors" 
@@ -58,7 +58,7 @@
             @click="mobileOpen = false"
           >
             {{ $t('app.register') }}
-          </router-link>
+          </router-link> -->
           
           <!-- Language Toggle Button -->
           <button 
@@ -69,13 +69,13 @@
           </button>
           
           <!-- Register CTA Button -->
-          <router-link 
+          <!-- <router-link 
             to="/register" 
             class="block w-full mt-2 py-3 px-4 bg-green-600 text-white font-bold text-center rounded-lg shadow-lg hover:bg-green-700 transition-colors"
             @click="mobileOpen = false"
           >
             {{ $t('app.register') }}
-          </router-link>
+          </router-link> -->
         </div>
       </div>
     </transition>
